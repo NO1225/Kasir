@@ -44,6 +44,7 @@ namespace Kasir.Api.Controllers.Web
 
         public async Task<IActionResult> SignOut()
         {
+            base.SignOut();
             // await signInManager.SignOutAsync();
             return RedirectToAction("index", "Home");
         }

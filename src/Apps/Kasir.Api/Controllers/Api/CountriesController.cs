@@ -9,9 +9,18 @@ using Kasir.Application.Common.Models;
 using Kasir.Application.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Kasir.Application.Common.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Kasir.Api.Services;
 
 namespace Kasir.Api.Controllers.Api
 {
+
+    public class UploadCommand
+    {
+        public IFormFile File { get; set; }
+    }
+
     [Authorize]
     public class CountriesController : BaseApiController
     {
@@ -22,22 +31,23 @@ namespace Kasir.Api.Controllers.Api
             return Ok(await Mediator.Send(new GetAllCountriesQuery(), cancellationToken));
         }
 
-        [HttpPost("/Create")]
-        public async Task<ActionResult<ServiceResult<CountryDto>>> Create(CreateCountryCommand command)
-        {
-            return Ok(await Mediator.Send(command));
-        }
+        //[HttpPost("/Create")]
+        //public async Task<ActionResult<ServiceResult<CountryDto>>> Create([FromForm] CreateCountryCommand command, [FromForm] UploadCommand fileCommand)
+        //{
+        //    command.AddCountryImage(new FormFileProxy(fileCommand.File));
+        //    return Ok(await Mediator.Send(command));
+        //}
 
-        [HttpPut("/Put")]
-        public async Task<ActionResult<ServiceResult<CountryDto>>> Update(UpdateCountryCommand command)
-        {
-            return Ok(await Mediator.Send(command));
-        }
+        //[HttpPut("/Put")]
+        //public async Task<ActionResult<ServiceResult<CountryDto>>> Update(UpdateCountryCommand command)
+        //{
+        //    return Ok(await Mediator.Send(command));
+        //}
 
-        [HttpDelete("Del/{id}")]
-        public async Task<ActionResult<ServiceResult<CountryDto>>> Delete(int id)
-        {
-            return Ok(await Mediator.Send(new DeleteCountryCommand { Id = id }));
-        }
+        //[HttpDelete("Del/{id}")]
+        //public async Task<ActionResult<ServiceResult<CountryDto>>> Delete(int id)
+        //{
+        //    return Ok(await Mediator.Send(new DeleteCountryCommand { Id = id }));
+        //}
     }
 }

@@ -13,6 +13,13 @@ namespace Kasir.Application.Countries.Commands.Create
     public class CreateCountryCommand : IRequestWrapper<CountryDto>
     {
         public string Name { get; set; }
+
+        internal IFileStream CountryImage;
+
+        public void AddCountryImage(IFileStream fileStream)
+        {
+            CountryImage = fileStream;
+        }
     }
 
     public class CreateCountryCommandHandler : IRequestHandlerWrapper<CreateCountryCommand, CountryDto>
