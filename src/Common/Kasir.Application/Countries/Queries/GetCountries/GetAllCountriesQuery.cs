@@ -32,7 +32,7 @@ namespace Kasir.Application.Countries.Queries.GetCountries
                 .ProjectToType<CountryDto>(_mapper.Config)
                 .ToListAsync(cancellationToken);
 
-            return list.Count > 0 ? ServiceResult.Success(list) : ServiceResult.Failed<List<CountryDto>>(ServiceError.NotFound);
+            return ServiceResult.Success(list);
         }
     }
 }

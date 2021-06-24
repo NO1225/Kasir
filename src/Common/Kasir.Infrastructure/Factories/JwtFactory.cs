@@ -1,4 +1,5 @@
 ﻿using Kasir.Domain.Common;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,7 +46,8 @@ namespace Kasir.Infrastructure.Factories
                         ValidAudience = jwtOptions.Audience,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Key))
                     };
-                });
+                })
+                .AddIdentityServerJwt(); 
 
             services.ConfigureApplicationCookie(options =>
             {

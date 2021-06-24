@@ -25,7 +25,7 @@ namespace Kasir.Application.ApplicationUser.Queries.GetToken
 
         public async Task<ServiceResult<LoginResponse>> Handle(GetTokenQuery request, CancellationToken cancellationToken)
         {
-            var user = await _identityService.CheckUserPassword(request.Email, request.Password);
+            var user = await _identityService.CheckUserPassword(request.Email, request.Password, true);
 
             if (user == null)
                 return ServiceResult.Failed<LoginResponse>(ServiceError.ForbiddenError);
@@ -34,7 +34,7 @@ namespace Kasir.Application.ApplicationUser.Queries.GetToken
             return ServiceResult.Success(new LoginResponse
             {
                 User = user,
-                Token = _tokenService.CreateJwtSecurityToken(user.Id)
+                Token = await _tokenService.CreateJwtSecurityTokenAsync(user.Id)
             });
         }
 

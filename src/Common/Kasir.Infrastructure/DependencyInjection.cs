@@ -47,6 +47,8 @@ namespace Kasir.Infrastructure
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddJWTAuthentication(configuration);
+
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
@@ -56,7 +58,6 @@ namespace Kasir.Infrastructure
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<ITokenService, TokenService>();
 
-            services.AddJWTAuthentication(configuration);
 
             return services;
         }

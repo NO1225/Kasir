@@ -6,19 +6,19 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/Cities": {
+    "/All": {
       "get": {
         "tags": [
-          "Cities"
+          "Countries"
         ],
-        "operationId": "Cities_GetAllCities",
+        "operationId": "Countries_GetAllCountries",
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ServiceResultOfListOfCityDto"
+                  "$ref": "#/components/schemas/ServiceResult_1OfOfList_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e"
                 }
               }
             }
@@ -26,21 +26,23 @@
         },
         "security": [
           {
-            "JWT": []
+            "Bearer": []
           }
         ]
-      },
+      }
+    },
+    "/Create": {
       "post": {
         "tags": [
-          "Cities"
+          "Countries"
         ],
-        "operationId": "Cities_Create",
+        "operationId": "Countries_Create",
         "requestBody": {
           "x-name": "command",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCityCommand"
+                "$ref": "#/components/schemas/CreateCountryCommand"
               }
             }
           },
@@ -53,7 +55,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ServiceResultOfCityDto"
+                  "$ref": "#/components/schemas/ServiceResult_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_null"
                 }
               }
             }
@@ -61,21 +63,23 @@
         },
         "security": [
           {
-            "JWT": []
+            "Bearer": []
           }
         ]
-      },
+      }
+    },
+    "/Put": {
       "put": {
         "tags": [
-          "Cities"
+          "Countries"
         ],
-        "operationId": "Cities_Update",
+        "operationId": "Countries_Update",
         "requestBody": {
           "x-name": "command",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCityCommand"
+                "$ref": "#/components/schemas/UpdateCountryCommand"
               }
             }
           },
@@ -88,7 +92,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ServiceResultOfCityDto"
+                  "$ref": "#/components/schemas/ServiceResult_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_null"
                 }
               }
             }
@@ -96,52 +100,17 @@
         },
         "security": [
           {
-            "JWT": []
+            "Bearer": []
           }
         ]
       }
     },
-    "/api/Cities/{id}": {
-      "get": {
-        "tags": [
-          "Cities"
-        ],
-        "operationId": "Cities_GetCityById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceResultOfCityDto"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      },
+    "/Del/{id}": {
       "delete": {
         "tags": [
-          "Cities"
+          "Countries"
         ],
-        "operationId": "Cities_Delete",
+        "operationId": "Countries_Delete",
         "parameters": [
           {
             "name": "id",
@@ -160,7 +129,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ServiceResultOfCityDto"
+                  "$ref": "#/components/schemas/ServiceResult_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_null"
                 }
               }
             }
@@ -168,87 +137,12 @@
         },
         "security": [
           {
-            "JWT": []
+            "Bearer": []
           }
         ]
       }
     },
-    "/api/Districts/{id}": {
-      "get": {
-        "tags": [
-          "Districts"
-        ],
-        "operationId": "Districts_Get",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      }
-    },
-    "/api/Districts": {
-      "post": {
-        "tags": [
-          "Districts"
-        ],
-        "operationId": "Districts_Create",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateDistrictCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceResultOfDistrictDto"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      }
-    },
-    "/api/Login": {
+    "/Login": {
       "post": {
         "tags": [
           "Login"
@@ -272,125 +166,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ServiceResultOfLoginResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Villages": {
-      "get": {
-        "tags": [
-          "Villages"
-        ],
-        "operationId": "Villages_GetAllVillagesWithPagination",
-        "requestBody": {
-          "x-name": "query",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetAllVillagesWithPaginationQuery"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceResultOfPaginatedListOfVillageDto"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      }
-    },
-    "/api/WeatherForecast": {
-      "get": {
-        "tags": [
-          "WeatherForecast"
-        ],
-        "operationId": "WeatherForecast_Get",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/WeatherForecast/current": {
-      "get": {
-        "tags": [
-          "WeatherForecast"
-        ],
-        "operationId": "WeatherForecast_GetCurrentWeather",
-        "parameters": [
-          {
-            "name": "Q",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          },
-          {
-            "name": "Lat",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            },
-            "x-position": 2
-          },
-          {
-            "name": "Lon",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            },
-            "x-position": 3
-          },
-          {
-            "name": "Id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 4
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceResultOfCurrentWeatherForecastDto"
+                  "$ref": "#/components/schemas/ServiceResult_1OfOfLoginResponseAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_null"
                 }
               }
             }
@@ -401,7 +177,7 @@
   },
   "components": {
     "schemas": {
-      "ServiceResultOfListOfCityDto": {
+      "ServiceResult_1OfOfList_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ServiceResult"
@@ -414,14 +190,14 @@
                 "type": "array",
                 "nullable": true,
                 "items": {
-                  "$ref": "#/components/schemas/CityDto"
+                  "$ref": "#/components/schemas/Country"
                 }
               }
             }
           }
         ]
       },
-      "CityDto": {
+      "Country": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -430,65 +206,16 @@
             "format": "int32"
           },
           "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "imagePath": {
             "type": "string",
             "nullable": true
           },
           "createDate": {
             "type": "string",
-            "nullable": true
-          },
-          "active": {
-            "type": "boolean"
-          },
-          "districts": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/DistrictDto"
-            }
-          }
-        }
-      },
-      "DistrictDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cityId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "villages": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/VillageDto"
-            }
-          }
-        }
-      },
-      "VillageDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "districtId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
+            "format": "date-time"
           }
         }
       },
@@ -523,7 +250,7 @@
           }
         }
       },
-      "ServiceResultOfCityDto": {
+      "ServiceResult_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_null": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ServiceResult"
@@ -536,7 +263,7 @@
                 "nullable": true,
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/CityDto"
+                    "$ref": "#/components/schemas/Country"
                   }
                 ]
               }
@@ -544,7 +271,7 @@
           }
         ]
       },
-      "CreateCityCommand": {
+      "CreateCountryCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -554,7 +281,7 @@
           }
         }
       },
-      "UpdateCityCommand": {
+      "UpdateCountryCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -565,48 +292,10 @@
           "name": {
             "type": "string",
             "nullable": true
-          },
-          "active": {
-            "type": "boolean"
           }
         }
       },
-      "ServiceResultOfDistrictDto": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ServiceResult"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "data": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/DistrictDto"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "CreateDistrictCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "cityId": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "ServiceResultOfLoginResponse": {
+      "ServiceResult_1OfOfLoginResponseAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_null": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ServiceResult"
@@ -635,7 +324,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/ApplicationUserDto"
+                "$ref": "#/components/schemas/ApplicationUser"
               }
             ]
           },
@@ -645,7 +334,7 @@
           }
         }
       },
-      "ApplicationUserDto": {
+      "ApplicationUser": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -676,374 +365,16 @@
             "nullable": true
           }
         }
-      },
-      "ServiceResultOfPaginatedListOfVillageDto": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ServiceResult"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "data": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/PaginatedListOfVillageDto"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "PaginatedListOfVillageDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "items": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/VillageDto"
-            }
-          },
-          "pageIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "hasPreviousPage": {
-            "type": "boolean"
-          },
-          "hasNextPage": {
-            "type": "boolean"
-          }
-        }
-      },
-      "GetAllVillagesWithPaginationQuery": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "districtId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pageNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "WeatherForecast": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "temperatureC": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "temperatureF": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "summary": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "ServiceResultOfCurrentWeatherForecastDto": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ServiceResult"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "data": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/CurrentWeatherForecastDto"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "CurrentWeatherForecastDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "coord": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Coord"
-              }
-            ]
-          },
-          "weather": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Weather"
-            }
-          },
-          "base": {
-            "type": "string",
-            "nullable": true
-          },
-          "main": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Main"
-              }
-            ]
-          },
-          "visibility": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "wind": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Wind"
-              }
-            ]
-          },
-          "rain": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Rain"
-              }
-            ]
-          },
-          "clouds": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Clouds"
-              }
-            ]
-          },
-          "snow": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Snow"
-              }
-            ]
-          },
-          "dt": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "sys": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Sys"
-              }
-            ]
-          },
-          "timezone": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "cod": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Coord": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "lon": {
-            "type": "number",
-            "format": "double"
-          },
-          "lat": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "Weather": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "main": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "icon": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "Main": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "temp": {
-            "type": "number",
-            "format": "double"
-          },
-          "feels_like": {
-            "type": "number",
-            "format": "double"
-          },
-          "temp_min": {
-            "type": "number",
-            "format": "double"
-          },
-          "temp_max": {
-            "type": "number",
-            "format": "double"
-          },
-          "pressure": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "humidity": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Wind": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "speed": {
-            "type": "number",
-            "format": "double"
-          },
-          "deg": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Rain": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "_1h": {
-            "type": "number",
-            "format": "double"
-          },
-          "_3h": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "Clouds": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "all": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Snow": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "_1h": {
-            "type": "number",
-            "format": "double"
-          },
-          "_3h": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "Sys": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "type": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "country": {
-            "type": "string",
-            "nullable": true
-          },
-          "sunrise": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "sunset": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
       }
     },
     "securitySchemes": {
-      "JWT": {
-        "type": "apiKey",
-        "description": "Type into the textbox: Bearer {your JWT token}.",
+      "Bearer": {
+        "type": "http",
+        "description": "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
         "name": "Authorization",
-        "in": "header"
+        "in": "header",
+        "scheme": "bearer"
       }
     }
-  },
-  "security": [
-    {
-      "JWT": []
-    }
-  ]
+  }
 }

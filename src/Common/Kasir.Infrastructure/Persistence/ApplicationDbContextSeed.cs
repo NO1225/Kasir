@@ -29,10 +29,10 @@ namespace Kasir.Infrastructure.Persistence
             {
                 adminUser = new ApplicationUser()
                 {
-                    UserName = "admin",
+                    UserName = "admin@gmail.com",
                     Email = "admin@gmail.com"
                 };
-                await userManager.CreateAsync(adminUser, "admin123");
+                await userManager.CreateAsync(adminUser, "admiN@123");
             }
 
             var userRoles = await userManager.GetRolesAsync(adminUser);
@@ -47,10 +47,10 @@ namespace Kasir.Infrastructure.Persistence
             {
                 developerUser = new ApplicationUser()
                 {
-                    UserName = "developer",
+                    UserName = "developer@gmail.com",
                     Email = "developer@gmail.com"
                 };
-                await userManager.CreateAsync(developerUser, "developer123");
+                await userManager.CreateAsync(developerUser, "developeR@123");
             }
 
             userRoles = await userManager.GetRolesAsync(developerUser);

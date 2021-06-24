@@ -34,16 +34,13 @@ namespace Client.WorkerService
 
                     if (result.Succeeded)
                     {
-                        CitiesClient citiesClient = new CitiesClient(baseUrl);
+                        CountriesClient citiesClient = new CountriesClient(baseUrl);
                         citiesClient.SetBearerToken(result.Data.Token);
-                        var res = await citiesClient.GetAllCitiesAsync(stoppingToken);     //consume a webApi get action
+                        var res = await citiesClient.GetAllCountriesAsync(stoppingToken);     //consume a webApi get action
                         foreach (var item in res.Data)
                         {
                             Console.WriteLine($"City: { item.Name} ");
-                            foreach (var dist in item.Districts)
-                            {
-                                Console.WriteLine($"District: { dist.Name} ");
-                            }
+            
                         }
                         Console.WriteLine();
                     }

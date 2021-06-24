@@ -20,6 +20,8 @@ namespace Kasir.Api
 {
     public class Startup
     {
+        private readonly string corsPolicy = "AllowAllOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +34,7 @@ namespace Kasir.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication();
+
             services.AddInfrastructure(Configuration);//, Environment);
 
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
@@ -43,7 +46,7 @@ namespace Kasir.Api
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
 
-            services.AddControllers(options =>
+            services.AddControllersWithViews(options =>
                     options.Filters.Add<ApiExceptionFilterAttribute>())
                 .AddFluentValidation();
 
@@ -54,7 +57,16 @@ namespace Kasir.Api
             });
 
             services.AddOurOpenAPI();
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy(corsPolicy,
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                        builder.AllowAnyHeader();
+                        builder.AllowAnyMethod();
+                    });
+            });
             //services.AddOpenApiDocument(configure =>
             //{
             //    configure.Title = "Kasir API";
@@ -98,7 +110,10 @@ namespace Kasir.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                   name: "default",
+                   pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
         }
