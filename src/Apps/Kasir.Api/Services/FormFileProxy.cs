@@ -30,5 +30,10 @@ namespace Kasir.Api.Services
         {
             await file.CopyToAsync(target, cancellationToken);
         }
+       
+        public Stream OpenReadStream()
+        {
+            return file.OpenReadStream();
+        }
     }
 }

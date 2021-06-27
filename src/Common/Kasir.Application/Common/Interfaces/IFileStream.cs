@@ -18,5 +18,7 @@ namespace Kasir.Application.Common.Interfaces
         long Length { get; }
 
         Task CopyToAsync(Stream target, CancellationToken cancellationToken = default);
+
+        Stream OpenReadStream();
     }
 }

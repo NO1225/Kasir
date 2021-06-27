@@ -1,18 +1,23 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Kasir.Application.Common.Interfaces;
+﻿using Kasir.Application.Common.Interfaces;
 using Kasir.Application.Common.Models;
-using Kasir.Application.Common.Security;
 using Kasir.Application.Dto;
+using Kasir.Application.Files.Commands;
 using Kasir.Domain.Entities;
 using MapsterMapper;
+using MediatR;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Kasir.Application.Countries.Commands.Create
 {
-    [Authorize]
     public class CreateCountryCommand : IRequestWrapper<CountryDto>
     {
         public string Name { get; set; }
+
+        public List<CountryLanguageDto> CountryLanguageDtos { get; set; }
+
 
         internal IFileStream CountryImage;
 
@@ -25,11 +30,15 @@ namespace Kasir.Application.Countries.Commands.Create
     public class CreateCountryCommandHandler : IRequestHandlerWrapper<CreateCountryCommand, CountryDto>
     {
         private readonly IApplicationDbContext _context;
+        private readonly IMediator mediator;
         private readonly IMapper _mapper;
 
-        public CreateCountryCommandHandler(IApplicationDbContext context, IMapper mapper)
+        public CreateCountryCommandHandler(IApplicationDbContext context,
+            IMediator mediator,
+            IMapper mapper)
         {
             _context = context;
+            this.mediator = mediator;
             _mapper = mapper;
         }
 
@@ -38,9 +47,21 @@ namespace Kasir.Application.Countries.Commands.Create
             var entity = new Country
             {
                 Name = request.Name,
+                CountryLanguages = request.CountryLanguageDtos.Select(cl => new CountryLanguage
+                {
+                    LanguageId = cl.LanguageId,
+                    Name = cl.Name,
+                }).ToList()
             };
 
-            //entity.DomainEvents.Add(new CityCreatedEvent(entity));
+            var res = await mediator.Send(new AddCountryImageCommand { CountryImage = request.CountryImage });
+
+            if(res.Succeeded == false)
+            {
+                return new ServiceResult<CountryDto>(res.Error);
+            }
+
+            entity.ImagePath = res.Data;
 
             await _context.Countries.AddAsync(entity, cancellationToken);
 

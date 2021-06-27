@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
-namespace United.Machines.Api.Controllers.Web
+namespace Kasir.Api.Controllers.Web
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseWebController
     {
         private readonly ILogger<HomeController> _logger;
 

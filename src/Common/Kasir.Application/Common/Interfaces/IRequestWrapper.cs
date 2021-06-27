@@ -8,7 +8,18 @@ namespace Kasir.Application.Common.Interfaces
 
     }
 
+    public interface IRequestWrapper : IRequest<ServiceResult>
+    {
+
+
+    }
     public interface IRequestHandlerWrapper<TIn, TOut> : IRequestHandler<TIn, ServiceResult<TOut>> where TIn : IRequestWrapper<TOut>
+    {
+
+    }
+
+
+    public interface IRequestHandlerWrapper<TIn> : IRequestHandler<TIn, ServiceResult> where TIn : IRequestWrapper
     {
 
     }

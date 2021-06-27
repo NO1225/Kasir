@@ -15,7 +15,8 @@ namespace Kasir.Application.Countries.Commands.Update
 
             RuleFor(v => v.Name)
                 .MaximumLength(100).WithMessage("Name must not exceed 100 characters.")
-                .MustAsync(BeUniqueName).WithMessage("The specified country already exists. If you just want to activate the city leave the name field blank!");
+                //.MustAsync(BeUniqueName).WithMessage("The specified country already exists. If you just want to activate the city leave the name field blank!")
+                ;
 
             RuleFor(v => v.Id).NotNull();
         }

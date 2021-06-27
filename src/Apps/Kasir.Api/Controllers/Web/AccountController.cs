@@ -1,4 +1,5 @@
 ﻿using Kasir.Application.ApplicationUser.Queries.GetToken;
+using Kasir.Application.Common.Interfaces;
 using Kasir.Application.Helpers;
 using Kasir.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -10,9 +11,11 @@ namespace Kasir.Api.Controllers.Web
 {
     public class AccountController : BaseWebController
     {
+        private readonly IIdentityService identityService;
 
-        public AccountController()
+        public AccountController(IIdentityService identityService)
         {
+            this.identityService = identityService;
         }
 
         [AllowAnonymous]
@@ -44,8 +47,8 @@ namespace Kasir.Api.Controllers.Web
 
         public async Task<IActionResult> SignOut()
         {
-            base.SignOut();
-            // await signInManager.SignOutAsync();
+            await identityService.SignOutAsync();
+
             return RedirectToAction("index", "Home");
         }
 

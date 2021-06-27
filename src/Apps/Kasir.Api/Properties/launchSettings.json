@@ -20,7 +20,7 @@
     "Kasir.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api",
+      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/",
       "environmentVariables": {
         "UseInMemoryDatabase": "false",
         "ASPNETCORE_HTTPS_PORT": "5011",

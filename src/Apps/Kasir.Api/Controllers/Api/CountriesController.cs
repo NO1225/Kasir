@@ -16,10 +16,7 @@ using Kasir.Api.Services;
 namespace Kasir.Api.Controllers.Api
 {
 
-    public class UploadCommand
-    {
-        public IFormFile File { get; set; }
-    }
+
 
     [Authorize]
     public class CountriesController : BaseApiController

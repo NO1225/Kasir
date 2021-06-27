@@ -21,5 +21,6 @@ namespace Kasir.Application.Common.Interfaces
 
         Task<Result> DeleteUserAsync(string userId);
         bool IsSignedIn(ClaimsPrincipal principal);
+        Task SignOutAsync();
     }
 }

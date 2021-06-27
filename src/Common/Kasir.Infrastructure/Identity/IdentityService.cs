@@ -82,6 +82,11 @@ namespace Kasir.Infrastructure.Identity
             return _signInManager.IsSignedIn(principal);
         }
 
+        public async Task SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
         public async Task<Result> DeleteUserAsync(string userId)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
