@@ -13,6 +13,8 @@
 
         public const string WORD_IMAGE_FOLDER_PATH = "files/images/word/";
 
+        public const string LANGUAGE_IMAGE_FOLDER_PATH = "files/images/";
+
         public static string ShowCountryImage(string imageName)
         {
             return "/"+ COUNTRY_IMAGE_FOLDER_PATH + imageName;
@@ -20,6 +22,10 @@
         public static string ShowWordImage(string imageName)
         {
             return "/" + WORD_IMAGE_FOLDER_PATH + imageName;
+        }
+        public static string ShowLanguageImage(string imageName)
+        {
+            return "/" + LANGUAGE_IMAGE_FOLDER_PATH + imageName;
         }
     }
 }

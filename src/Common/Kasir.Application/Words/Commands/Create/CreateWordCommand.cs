@@ -76,7 +76,8 @@ namespace Kasir.Application.Words.Commands.Create
 
             foreach (var wordImage in request.WordImageDtos)
             {
-
+                if (wordImage.WordImage == null)
+                    continue;
                 var wordImageRes = await mediator.Send(new AddWordCountryImageCommand { WordImage = wordImage.WordImage });
 
                 if (wordImageRes.Succeeded == false)
