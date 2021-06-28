@@ -11,7 +11,7 @@
 <hr />
 <div>
     <form asp-action="Edit" class="row" enctype="multipart/form-data">
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <input type="hidden" asp-for="Id" class="form-control" />
@@ -37,7 +37,7 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
             @for (int i = 0; i < ((List<LanguageDto>)ViewBag.Languages).Count(); i++)
             {
                 LanguageDto lang = ViewBag.Languages[i];
@@ -62,7 +62,7 @@
                 </div>
             }
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
             @for (int i = 0; i < ((List<CountryDto>)ViewBag.Countries).Count(); i++)
             {
                 CountryDto country = ViewBag.Countries[i];
