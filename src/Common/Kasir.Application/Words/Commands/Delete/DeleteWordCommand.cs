@@ -11,20 +11,20 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Kasir.Application.Countries.Commands.Delete
+namespace Kasir.Application.Words.Commands.Delete
 {
-    public class DeleteCountryCommand : IRequestWrapper<CountryDto>
+    public class DeleteWordCommand : IRequestWrapper<WordDto>
     {
         public int Id { get; set; }
     }
 
-    public class DeleteCountryCommandHandler : IRequestHandlerWrapper<DeleteCountryCommand, CountryDto>
+    public class DeleteWordCommandHandler : IRequestHandlerWrapper<DeleteWordCommand, WordDto>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMediator mediator;
         private readonly IMapper _mapper;
 
-        public DeleteCountryCommandHandler(IApplicationDbContext context,
+        public DeleteWordCommandHandler(IApplicationDbContext context,
             IMediator mediator,
             IMapper mapper)
         {
@@ -33,24 +33,30 @@ namespace Kasir.Application.Countries.Commands.Delete
             _mapper = mapper;
         }
 
-        public async Task<ServiceResult<CountryDto>> Handle(DeleteCountryCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<WordDto>> Handle(DeleteWordCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Countries
+            var entity = await _context.Words
+                .Include(w=>w.WordImages)
                 .Where(l => l.Id == request.Id)
                 .SingleOrDefaultAsync(cancellationToken);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Country), request.Id);
+                throw new NotFoundException(nameof(Word), request.Id);
             }
 
-            _context.Countries.Remove(entity);
+            _context.Words.Remove(entity);
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            await mediator.Send(new DeleteCountryImageCommand() { OldImageName = entity.ImagePath });
+            await mediator.Send(new DeleteCountryImageCommand() { OldImageName = entity.ImageName });
 
-            return ServiceResult.Success(_mapper.Map<CountryDto>(entity));
+            foreach (var wordImage in entity.WordImages)
+            {
+                await mediator.Send(new DeleteCountryImageCommand() { OldImageName = wordImage.ImageName });
+            }
+
+            return ServiceResult.Success(_mapper.Map<WordDto>(entity));
         }
     }
 }

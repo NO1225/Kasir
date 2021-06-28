@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/src/Apps/Kasir.Api/wwwroot/files/images/country
+/src/Apps/Kasir.Api/wwwroot/files/images/word

@@ -20,6 +20,10 @@ namespace Kasir.Domain.Entities
         [MaxLength(450)]
         public string Information { get; set; }
 
+        [Required]
+        [MaxLength(400)]
+        public string ImageName { get; set; }
+
         public ICollection<WordLanguage> WordLanguages { get; set; }
 
         public ICollection<WordImage> WordImages { get; set; }

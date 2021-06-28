@@ -1,0 +1,92 @@
+﻿@model Kasir.Api.ViewModel.WordViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>WordViewModel</h4>
+<hr />
+<div>
+    <form asp-action="Edit" class="row" enctype="multipart/form-data">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Information" class="control-label"></label>
+                <input asp-for="Information" class="form-control" />
+                <span asp-validation-for="Information" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img width="200" height="200" src="@UploadDownloadHelper.ShowWordImage(Model.ImagePath)" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Image</label>
+                <input name="WordImage" type="file" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            @for (int i = 0; i < ((List<LanguageDto>)ViewBag.Languages).Count(); i++)
+            {
+                LanguageDto lang = ViewBag.Languages[i];
+                <div class="form-group">
+                    <input type="hidden"
+                       name="WordLanguageDtos[@i].LanguageId"
+                       value="@lang.Id" />
+                </div>
+                <label class="control-label">@lang.Name</label>
+
+                <div class="form-group">
+                    <label class="control-label">Name</label>
+                    <input name="WordLanguageDtos[@i].Name"
+                       value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordName"
+                       class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Information</label>
+                    <input name="WordLanguageDtos[@i].Information"
+                       value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordInformation"
+                       class="form-control" />
+                </div>
+            }
+        </div>
+        <div class="col-md-4">
+            @for (int i = 0; i < ((List<CountryDto>)ViewBag.Countries).Count(); i++)
+            {
+                CountryDto country = ViewBag.Countries[i];
+                <div class="form-group">
+                    <input type="hidden"
+                       name="WordImageDtos[@i].CountryId"
+                       value="@country.Id" />
+                </div>
+                <div class="form-group">
+                    <img width="100" height="100" src="@UploadDownloadHelper.ShowWordImage(Model.WordImageViewModels.FirstOrDefault(cl=>cl.CountryId == country.Id)?.ImagePath)" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">@country.Name</label>
+                    <input type="file" name="WordImageDtos[@i].WordImage" class="form-control" />
+                </div>
+            }
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

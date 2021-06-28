@@ -12,40 +12,41 @@ using System.Threading.Tasks;
 
 namespace Kasir.Application.Files.Commands
 {
-    public class UpdateCountryImageCommand : IRequestWrapper<string>
+    public class UpdateWordCountryImageCommand : IRequestWrapper<string>
     {
         public string OldImageName { get; set; }
 
-        public IFileStream CountryImage { get; set; }
+        public IFileStream WordImage { get; set; }
     }
 
-    public class UpdateCountryImageCommandHandler : IRequestHandlerWrapper<UpdateCountryImageCommand, string>
+    public class UpdateWordCountryImageCommandHandler : IRequestHandlerWrapper<UpdateWordCountryImageCommand, string>
     {
-        private readonly ILogger<UpdateCountryImageCommand> logger;
+        private readonly ILogger<UpdateWordCountryImageCommand> logger;
 
-        public UpdateCountryImageCommandHandler(ILogger<UpdateCountryImageCommand> logger)
+        public UpdateWordCountryImageCommandHandler(ILogger<UpdateWordCountryImageCommand> logger)
         {
             this.logger = logger;
         }
-        public async Task<ServiceResult<string>> Handle(UpdateCountryImageCommand request, CancellationToken cancellationToken)
+
+        public async Task<ServiceResult<string>> Handle(UpdateWordCountryImageCommand request, CancellationToken cancellationToken)
         {
             int _maxFileSize = 2 * 1024 * 1024;
-            int _minWidth = 350;
-            int _minHeight = 350;
-            int _resizeTo = 350;
-            string _imagesFolderPath = UploadDownloadHelper.COUNTRY_IMAGE_FOLDER_PATH;
+            int _minWidth = 450;
+            int _minHeight = 450;
+            int _resizeTo = 450;
+            string _imagesFolderPath = UploadDownloadHelper.WORD_IMAGE_FOLDER_PATH;
 
-            if (request.CountryImage.ContentType.Contains("image") == false)
+            if (request.WordImage.ContentType.Contains("image") == false)
             {
                 return new ServiceResult<string>(new ServiceError("image type is invalid", (int)ErrorCode.InvalidFileType));
             }
 
-            if (request.CountryImage.Length > _maxFileSize)
+            if (request.WordImage.Length > _maxFileSize)
             {
                 return new ServiceResult<string>(new ServiceError("image size is too large", (int)ErrorCode.FileIsTooLarge));
             }
 
-            var ext = Path.GetExtension(request.CountryImage.FileName);
+            var ext = Path.GetExtension(request.WordImage.FileName);
 
             var name = Guid.NewGuid().ToString();
 
@@ -56,13 +57,13 @@ namespace Kasir.Application.Files.Commands
             if (Directory.Exists(path) == false)
                 Directory.CreateDirectory(path);
 
-            using var image = Image.Load(request.CountryImage.OpenReadStream());
+            using var image = Image.Load(request.WordImage.OpenReadStream());
             if (image.Width < _minWidth || image.Height < _minHeight)
             {
                 return new ServiceResult<string>(new ServiceError("image size is too small", (int)ErrorCode.ImageTooSmall));
             }
 
-            if (request.OldImageName != null && File.Exists(path + request.OldImageName))
+            if (File.Exists(path + request.OldImageName))
             {
                 try
                 {
