@@ -14,10 +14,10 @@ namespace Kasir.Api.Controllers.Api
     public class WordsController : BaseApiController
     {
         [HttpGet(ApiRoutes.Words.GetAll)]
-        public async Task<ActionResult<ServiceResult<List<WordDto>>>> GetAllWords(CancellationToken cancellationToken)
+        public async Task<ActionResult<ServiceResult<List<WordDto>>>> GetAllWords([FromQuery] GetAllWordsQuery query, CancellationToken cancellationToken)
         {
             //Cancellation token example.
-            return Ok(await Mediator.Send(new GetAllWordsQuery() { LanguageId = 2, CountryId = 1 }, cancellationToken));
+            return Ok(await Mediator.Send(query, cancellationToken));
         }
 
     }

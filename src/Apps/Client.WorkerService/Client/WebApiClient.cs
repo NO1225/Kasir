@@ -49,17 +49,22 @@ namespace Client.WorkerService.Client
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ServiceResult_1OfOfList_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e> GetAllCountriesAsync()
+        public System.Threading.Tasks.Task<ServiceResult_1OfOfList_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e> GetAllCountriesAsync(int? languageId)
         {
-            return GetAllCountriesAsync(System.Threading.CancellationToken.None);
+            return GetAllCountriesAsync(languageId, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ServiceResult_1OfOfList_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e> GetAllCountriesAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ServiceResult_1OfOfList_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e> GetAllCountriesAsync(int? languageId, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Countries/GetAll");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Countries/GetAll?");
+            if (languageId != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("LanguageId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(languageId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
     
             var client_ = new System.Net.Http.HttpClient();
             var disposeClient_ = true;
@@ -679,17 +684,26 @@ namespace Client.WorkerService.Client
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ServiceResult_1OfOfList_1OfOfWordAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e> GetAllWordsAsync()
+        public System.Threading.Tasks.Task<ServiceResult_1OfOfList_1OfOfWordAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e> GetAllWordsAsync(int? languageId, int? countryId)
         {
-            return GetAllWordsAsync(System.Threading.CancellationToken.None);
+            return GetAllWordsAsync(languageId, countryId, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ServiceResult_1OfOfList_1OfOfWordAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e> GetAllWordsAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ServiceResult_1OfOfList_1OfOfWordAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e> GetAllWordsAsync(int? languageId, int? countryId, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Words/GetAll");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Words/GetAll?");
+            if (languageId != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("LanguageId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(languageId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (countryId != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("CountryId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(countryId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
     
             var client_ = new System.Net.Http.HttpClient();
             var disposeClient_ = true;

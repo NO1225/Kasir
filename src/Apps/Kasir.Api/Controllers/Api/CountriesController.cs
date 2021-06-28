@@ -14,10 +14,10 @@ namespace Kasir.Api.Controllers.Api
     public class CountriesController : BaseApiController
     {
         [HttpGet(ApiRoutes.Countries.GetAll)]
-        public async Task<ActionResult<ServiceResult<List<CountryDto>>>> GetAllCountries(CancellationToken cancellationToken)
+        public async Task<ActionResult<ServiceResult<List<CountryDto>>>> GetAllCountries([FromQuery]GetAllCountriesQuery query,CancellationToken cancellationToken)
         {
             //Cancellation token example.
-            return Ok(await Mediator.Send(new GetAllCountriesQuery() { LanguageId = 2 }, cancellationToken));
+            return Ok(await Mediator.Send(query, cancellationToken));
         }
 
     }

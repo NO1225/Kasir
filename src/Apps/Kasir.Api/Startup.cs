@@ -86,7 +86,7 @@ namespace Kasir.Api
 
             app.UseHealthChecks("/health");
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseStaticFiles();
             app.ConfigureOurOpenAPI();

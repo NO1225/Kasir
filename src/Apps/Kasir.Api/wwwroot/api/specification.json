@@ -12,6 +12,17 @@
           "Countries"
         ],
         "operationId": "Countries_GetAllCountries",
+        "parameters": [
+          {
+            "name": "LanguageId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -84,6 +95,26 @@
           "Words"
         ],
         "operationId": "Words_GetAllWords",
+        "parameters": [
+          {
+            "name": "LanguageId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "CountryId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
