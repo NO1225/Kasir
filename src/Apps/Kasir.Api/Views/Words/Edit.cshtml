@@ -72,7 +72,15 @@
                        value="@country.Id" />
                 </div>
                 <div class="form-group">
-                    <img width="100" height="100" src="@UploadDownloadHelper.ShowWordImage(Model.WordImageViewModels.FirstOrDefault(cl=>cl.CountryId == country.Id)?.ImagePath)" />
+                    @if (Model.WordImageViewModels.FirstOrDefault(cl => cl.CountryId == country.Id)?.ImagePath == null)
+                    {
+                        <p>No Image</p>
+                    }
+                    else
+                    {
+                        <img width="100" height="100" src="@UploadDownloadHelper.ShowWordImage(Model.WordImageViewModels.FirstOrDefault(cl=>cl.CountryId == country.Id)?.ImagePath)" />
+
+                    }
                 </div>
                 <div class="form-group">
                     <label class="control-label">@country.Name</label>

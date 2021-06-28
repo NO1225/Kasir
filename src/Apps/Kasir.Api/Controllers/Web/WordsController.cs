@@ -181,6 +181,45 @@ namespace Kasir.Api.Controllers.Web
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            await AddLanguagesAsync();
+            await AddCountriesAsync();
+
+            var Word = await applicationDbContext.Words
+                .Include(c => c.WordLanguages)
+                .ThenInclude(c => c.Language)
+                .Include(c => c.WordImages)
+                .ThenInclude(c => c.Country)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (Word == null)
+            {
+                return NotFound();
+            }
+
+            return View(new WordViewModel
+            {
+                Id = Word.Id,
+                Name = Word.Name,
+                Information = Word.Information,
+                ImagePath = Word.ImageName,
+                WordLanguageViewModels = Word.WordLanguages.Select(cl => new WordLanguageViewModel
+                {
+                    WordName = cl.Name,
+                    WordInformation = cl.Information,
+                    Language = cl.Language.Name,
+                    LanguageId = cl.LanguageId,
+                }).ToList(),
+                WordImageViewModels = Word.WordImages.Select(cl => new WordImageViewModel
+                {
+                    ImagePath = cl.ImageName,
+                    Country = cl.Country.Name,
+                    CountryId = cl.CountryId,
+                }).ToList()
+            });
+        }
         private async Task AddLanguagesAsync()
         {
             ViewBag.Languages = await applicationDbContext
