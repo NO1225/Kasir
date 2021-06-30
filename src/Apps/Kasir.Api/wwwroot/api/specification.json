@@ -6,6 +6,37 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/AppInfo/Info": {
+      "get": {
+        "tags": [
+          "AppInfo"
+        ],
+        "operationId": "AppInfo_GetAppInfo",
+        "parameters": [
+          {
+            "name": "LanguageId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceResult_1OfOfAppInfoAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_null"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Countries/GetAll": {
       "get": {
         "tags": [
@@ -132,6 +163,72 @@
   },
   "components": {
     "schemas": {
+      "ServiceResult_1OfOfAppInfoAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_null": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ServiceResult"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/AppInfo"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "AppInfo": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ServiceResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "succeeded": {
+            "type": "boolean"
+          },
+          "error": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ServiceError"
+              }
+            ]
+          }
+        }
+      },
+      "ServiceError": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "ServiceResult_1OfOfList_1OfOfCountryAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_nullAndCoreLibAnd_0AndCulture_neutralAndPublicKeyToken_7cec85d7bea7798e": {
         "allOf": [
           {
@@ -171,37 +268,6 @@
           "createDate": {
             "type": "string",
             "format": "date-time"
-          }
-        }
-      },
-      "ServiceResult": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "succeeded": {
-            "type": "boolean"
-          },
-          "error": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/ServiceError"
-              }
-            ]
-          }
-        }
-      },
-      "ServiceError": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "code": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
@@ -345,6 +411,10 @@
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
           },
           "name": {
             "type": "string",

@@ -6,25 +6,25 @@
         <span class="brand-text font-weight-light">Kasir</span>
     </a>
     <div class="sidebar">
-@if (User.Identity.IsAuthenticated)
-{
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-            <img src="~/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-            <a asp-action="Manage" asp-controller="Account" class="d-block">مرحبا, @User.Identity.Name </a>
-        </div>
-    </div>
-}
-else
-{
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
-            <a href="#" class="d-block">مرحبا، بالضيف</a>
-        </div>
-    </div>
-}
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="~/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a asp-action="Manage" asp-controller="Account" class="d-block">مرحبا, @User.Identity.Name </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="info">
+                    <a href="#" class="d-block">مرحبا، بالضيف</a>
+                </div>
+            </div>
+        }
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item ">
@@ -38,13 +38,21 @@ else
                 @if (User.Identity.IsAuthenticated && (User.IsInRole(AccessRoles.Developer) || User.IsInRole(AccessRoles.Admin)))
                 {
                     @*<li class="nav-item ">
-                <a asp-controller="Announcements" asp-action="Index" class="nav-link @Url.MakeActiveClass("Announcement")">
-                    <i class="nav-icon fas fa-newspaper"></i>
-                    <p>
+                        <a asp-controller="Announcements" asp-action="Index" class="nav-link @Url.MakeActiveClass("Announcement")">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>
                         التعميمات
-                    </p>
-                </a>
-            </li>*@
+                        </p>
+                        </a>
+                        </li>*@
+                    <li class="nav-item ">
+                        <a asp-controller="AppInfos" asp-action="Index" class="nav-link @Url.MakeActiveClass("AppInfos")">
+                            <i class="nav-icon fas fa-location-arrow"></i>
+                            <p>
+                                صفحة الترحيب
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-item ">
                         <a asp-controller="Countries" asp-action="Index" class="nav-link @Url.MakeActiveClass("Countries")">
                             <i class="nav-icon fas fa-location-arrow"></i>
@@ -60,63 +68,7 @@ else
                                 الكلمات
                             </p>
                         </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a asp-controller="Attendance" asp-action="Index" class="nav-link @Url.MakeActiveClass("attendance")">
-                            <i class="nav-icon fas fa-history"></i>
-                            <p>
-                                سجل الحضور
-                            </p>
-                        </a>
-                    </li>
-                    @*<li class="nav-item ">
-                <a asp-controller="Grades" asp-action="Index" class="nav-link @Url.MakeActiveClass("grades")">
-                    <i class="nav-icon fas fa-chair"></i>
-                    <p>
-                        الصفوف
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a asp-controller="Students" asp-action="Index" class="nav-link @Url.MakeActiveClass("students")">
-                    <i class="nav-icon fas fa-user-graduate"></i>
-                    <p>
-                        الطلاب
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a asp-controller="Teachers" asp-action="Index" class="nav-link @Url.MakeActiveClass("teachers")">
-                    <i class="nav-icon fas fa-graduation-cap"></i>
-                    <p>
-                        المعلمين
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a asp-controller="Points" asp-action="Index" class="nav-link @Url.MakeActiveClass("points")">
-                    <i class="nav-icon fas fa-receipt"></i>
-                    <p>
-                        تبادل النقاط
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a asp-controller="AppInformation" asp-action="Index" class="nav-link @Url.MakeActiveClass("appinfromtaion")">
-                    <i class="nav-icon fas fa-info"></i>
-                    <p>
-                        معلومات التطبيق
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a asp-controller="FeedBacks" asp-action="Index" class="nav-link @Url.MakeActiveClass("feedbacks")">
-                    <i class="nav-icon fas fa-comments"></i>
-                    <p>
-                        الملاحظات
-                    </p>
-                </a>
-            </li>*@
+                    </li>             
                     @if (User.IsInRole(AccessRoles.Developer))
                     {
                         <li class="nav-item ">

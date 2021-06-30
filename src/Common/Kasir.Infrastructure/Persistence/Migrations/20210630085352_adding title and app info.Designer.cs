@@ -4,14 +4,16 @@ using Kasir.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Kasir.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210630085352_adding title and app info")]
+    partial class addingtitleandappinfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,40 +137,10 @@ namespace Kasir.Infrastructure.Persistence.Migrations
                     b.Property<string>("Creator")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Modifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifyDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppInfos");
-                });
-
-            modelBuilder.Entity("Kasir.Domain.Entities.AppInfoLanguage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AppInfoId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Creator")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Modifier")
                         .HasColumnType("nvarchar(max)");
@@ -183,11 +155,7 @@ namespace Kasir.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppInfoId");
-
-                    b.HasIndex("LanguageId");
-
-                    b.ToTable("AppInfoLanguages");
+                    b.ToTable("AppInfos");
                 });
 
             modelBuilder.Entity("Kasir.Domain.Entities.Country", b =>
@@ -629,25 +597,6 @@ namespace Kasir.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Kasir.Domain.Entities.AppInfoLanguage", b =>
-                {
-                    b.HasOne("Kasir.Domain.Entities.AppInfo", "AppInfo")
-                        .WithMany("AppInfoLanguages")
-                        .HasForeignKey("AppInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Kasir.Domain.Entities.Language", "Language")
-                        .WithMany("AppInfoLanguages")
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppInfo");
-
-                    b.Navigation("Language");
-                });
-
             modelBuilder.Entity("Kasir.Domain.Entities.CountryLanguage", b =>
                 {
                     b.HasOne("Kasir.Domain.Entities.Country", "Country")
@@ -756,11 +705,6 @@ namespace Kasir.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Kasir.Domain.Entities.AppInfo", b =>
-                {
-                    b.Navigation("AppInfoLanguages");
-                });
-
             modelBuilder.Entity("Kasir.Domain.Entities.Country", b =>
                 {
                     b.Navigation("CountryLanguages");
@@ -770,8 +714,6 @@ namespace Kasir.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Kasir.Domain.Entities.Language", b =>
                 {
-                    b.Navigation("AppInfoLanguages");
-
                     b.Navigation("CountryLanguages");
 
                     b.Navigation("WordLanguages");

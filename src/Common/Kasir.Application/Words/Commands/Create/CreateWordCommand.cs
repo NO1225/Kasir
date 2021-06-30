@@ -15,6 +15,7 @@ namespace Kasir.Application.Words.Commands.Create
 {
     public class CreateWordCommand : IRequestWrapper<WordDto>
     {
+        public string Title { get; set; }
         public string Name { get; set; }
 
         public string Information { get; set; }
@@ -54,11 +55,13 @@ namespace Kasir.Application.Words.Commands.Create
         {
             var entity = new Word
             {
+                Title = request.Title,
                 Name = request.Name,
                 Information = request.Information,
                 WordLanguages = request.WordLanguageDtos.Select(cl => new WordLanguage
                 {
                     LanguageId = cl.LanguageId,
+                    Title = cl.Title,
                     Name = cl.Name,
                     Information = cl.Information,
                 }).ToList(),

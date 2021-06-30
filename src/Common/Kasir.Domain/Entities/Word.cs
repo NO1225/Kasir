@@ -14,6 +14,10 @@ namespace Kasir.Domain.Entities
 
         [Required]
         [MaxLength(100)]
+        public string Title { get; set; }
+
+        [Required]
+        [MaxLength(100)]
         public string Name { get; set; }
 
         [Required]

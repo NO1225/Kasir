@@ -14,6 +14,12 @@
         <div class="col-md-12 col-lg-6 col-xl-4">
             <dl class="row">
                 <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Name)
                 </dt>
                 <dd class="col-sm-8">
@@ -22,7 +28,8 @@
                 <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Information)
                 </dt>
-                <dd class="col-sm-8">g
+                <dd class="col-sm-8">
+                    g
                     @Html.DisplayFor(model => model.Information)
                 </dd>
                 <dt class="col-sm-4">
@@ -43,6 +50,12 @@
 
                     </dt>
                     <dd class="col-sm-8">
+                    </dd>
+                    <dt class="col-sm-4">
+                        Title
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordTitle
                     </dd>
                     <dt class="col-sm-4">
                         Name

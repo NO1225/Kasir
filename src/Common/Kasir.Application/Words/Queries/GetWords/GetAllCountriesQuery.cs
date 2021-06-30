@@ -40,6 +40,9 @@ namespace Kasir.Application.Words.Queries.GetWords
                     ImageName = UploadDownloadHelper.ShowWordImage(c.WordImages.FirstOrDefault(cl => cl.CountryId == request.CountryId) == null
                     ? c.ImageName
                     : c.WordImages.FirstOrDefault(cl => cl.CountryId == request.CountryId).ImageName),
+                    Title = c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null
+                    ? c.Name
+                    : c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Title,
                     Name = c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null 
                     ? c.Name 
                     : c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Name,

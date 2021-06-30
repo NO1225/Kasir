@@ -19,6 +19,9 @@ namespace Kasir.Application.Common.Interfaces
 
         DbSet<WordLanguage> WordLanguages { get; set; }
 
+        DbSet<AppInfo> AppInfos { get; set; }
+
+        DbSet<AppInfoLanguage> AppInfoLanguages { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

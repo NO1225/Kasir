@@ -6,6 +6,8 @@ namespace Kasir.Api.ViewModel
 {
     public class CreateWordViewModel
     {
+        public string Title { get; set; }
+
         public string Name { get; set; }
 
         public string Information { get; set; }

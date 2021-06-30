@@ -2,7 +2,7 @@
 
 namespace Kasir.Api.ViewModel
 {
-    public class WordLanguageViewModel
+    public class AppInfoLanguageViewModel
     {
         public int LanguageId { get; set; }
 
@@ -10,12 +10,10 @@ namespace Kasir.Api.ViewModel
         public string Language { get; set; }
 
         [Display(Name = "Title")]
-        public string WordTitle { get; set; }
+        public string Title { get; set; }
 
-        [Display(Name = "Name")]
-        public string WordName { get; set; }
 
-        [Display(Name = "Info")]
-        public string WordInformation { get; set; }
+        [Display(Name = "Description")]
+        public string Description { get; set; }
     }
 }

@@ -40,10 +40,12 @@ namespace Kasir.Api.Controllers.Web
                 {
                     Id = c.Id,
                     Name = c.Name,
+                    Title = c.Title,
                     Information = c.Information,
                     ImagePath = c.ImageName,
                     WordLanguageViewModels = c.WordLanguages.Select(cl => new WordLanguageViewModel
                     {
+                        WordTitle = cl.Title,
                         WordName = cl.Name,
                         WordInformation = cl.Information,
                         Language = cl.Language.Name,
@@ -76,6 +78,7 @@ namespace Kasir.Api.Controllers.Web
             var command = new CreateWordCommand
             {
                 Information = viewModel.Information,
+                Title = viewModel.Title,
                 Name = viewModel.Name,
                 WordImageDtos = viewModel.WordImageDtos.Select(wid => new WordImageDto
                 {
@@ -122,11 +125,13 @@ namespace Kasir.Api.Controllers.Web
             return View(new WordViewModel
             {
                 Id = Word.Id,
+                Title = Word.Title,
                 Name = Word.Name,
                 Information = Word.Information,
                 ImagePath = Word.ImageName,
                 WordLanguageViewModels = Word.WordLanguages.Select(cl => new WordLanguageViewModel
                 {
+                    WordTitle = cl.Title,
                     WordName = cl.Name,
                     WordInformation = cl.Information,
                     Language = cl.Language.Name,
@@ -147,6 +152,7 @@ namespace Kasir.Api.Controllers.Web
             var command = new UpdateWordCommand
             {
                 Id = viewModel.Id,
+                Title = viewModel.Title,
                 Information = viewModel.Information,
                 Name = viewModel.Name,
                 WordImageDtos = viewModel.WordImageDtos.Select(wid => new WordImageDto
@@ -202,11 +208,13 @@ namespace Kasir.Api.Controllers.Web
             return View(new WordViewModel
             {
                 Id = Word.Id,
+                Title = Word.Title, 
                 Name = Word.Name,
                 Information = Word.Information,
                 ImagePath = Word.ImageName,
                 WordLanguageViewModels = Word.WordLanguages.Select(cl => new WordLanguageViewModel
                 {
+                    WordTitle = cl.Title, 
                     WordName = cl.Name,
                     WordInformation = cl.Information,
                     Language = cl.Language.Name,

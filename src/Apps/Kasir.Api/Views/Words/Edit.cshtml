@@ -17,13 +17,18 @@
                 <input type="hidden" asp-for="Id" class="form-control" />
             </div>
             <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input required asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input required asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Information" class="control-label"></label>
-                <input asp-for="Information" class="form-control" />
+                <input required asp-for="Information" class="form-control" />
                 <span asp-validation-for="Information" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,16 +52,22 @@
                        value="@lang.Id" />
                 </div>
                 <label class="control-label">@lang.Name</label>
-
+                
+                <div class="form-group">
+                    <label class="control-label">Title</label>
+                    <input required name="WordLanguageDtos[@i].Title"
+                       value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordTitle"
+                       class="form-control" />
+                </div>
                 <div class="form-group">
                     <label class="control-label">Name</label>
-                    <input name="WordLanguageDtos[@i].Name"
+                    <input required name="WordLanguageDtos[@i].Name"
                        value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordName"
                        class="form-control" />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Information</label>
-                    <input name="WordLanguageDtos[@i].Information"
+                    <input required name="WordLanguageDtos[@i].Information"
                        value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordInformation"
                        class="form-control" />
                 </div>

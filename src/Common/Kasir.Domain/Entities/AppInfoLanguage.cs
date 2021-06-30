@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Kasir.Domain.Entities
 {
-    public class WordLanguage : AuditableEntity
+    public class AppInfoLanguage : AuditableEntity
     {
-        public Word Word { get; set; }
+        public AppInfo AppInfo { get; set; }
 
         [Required]
-        public int WordId { get; set; }
+        public int AppInfoId { get; set; }
 
         public Language Language { get; set; }
 
@@ -18,13 +18,10 @@ namespace Kasir.Domain.Entities
         [Required]
         [MaxLength(100)]
         public string Title { get; set; }
-        
-        [Required]
-        [MaxLength(100)]
-        public string Name { get; set; }
 
         [Required]
         [MaxLength(450)]
-        public string Information { get; set; }
+        public string Description { get; set; }
+
     }
 }

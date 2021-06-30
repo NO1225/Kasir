@@ -2,7 +2,9 @@
 using Kasir.Domain.Enums;
 using Kasir.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -77,7 +79,7 @@ namespace Kasir.Infrastructure.Persistence
             //}
         }
 
-        public static async Task SeedSampleCityDataAsync(ApplicationDbContext context)
+        public static async Task SeedSampleDataAsync(ApplicationDbContext context)
         {
             // Seed, if necessary
             if (!context.Languages.Any())
@@ -100,6 +102,26 @@ namespace Kasir.Infrastructure.Persistence
                     ImageName = "fr.png"
                 }
                 );
+
+                await context.SaveChangesAsync();
+            }
+
+            if (!context.AppInfos.Any())
+            {
+                var appInfo = new AppInfo();
+
+                context.AppInfos.Add(appInfo);
+
+                await context.SaveChangesAsync();
+
+                var appInfoLanguages = await context.Languages.Select(l => new AppInfoLanguage
+                {
+                    LanguageId = l.Id,
+                    Title = "Kasir",
+                    Description = "Kasir"
+                }).ToListAsync();
+
+                appInfo.AppInfoLanguages = appInfoLanguages;
 
                 await context.SaveChangesAsync();
             }

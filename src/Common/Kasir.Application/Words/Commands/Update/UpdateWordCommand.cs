@@ -19,6 +19,8 @@ namespace Kasir.Application.Words.Commands.Update
     {
         public int Id { get; set; }
 
+        public string Title { get; set; }
+
         public string Name { get; set; }
 
         public string Information { get; set; }
@@ -26,7 +28,6 @@ namespace Kasir.Application.Words.Commands.Update
         public List<WordLanguageDto> WordLanguageDtos { get; set; }
 
         public List<WordImageDto> WordImageDtos { get; set; }
-
 
         internal IFileStream WordImage;
 
@@ -66,6 +67,9 @@ namespace Kasir.Application.Words.Commands.Update
                 throw new NotFoundException(nameof(Country), request.Id);
             }
 
+            if (!string.IsNullOrEmpty(request.Title))
+                entity.Title = request.Title;
+
             if (!string.IsNullOrEmpty(request.Name))
                 entity.Name = request.Name;
 
@@ -79,6 +83,7 @@ namespace Kasir.Application.Words.Commands.Update
                     var dto = request.WordLanguageDtos.FirstOrDefault(cldd => cldd.LanguageId == cl.LanguageId);
                     if (dto != null)
                     {
+                        cl.Title = dto.Title;
                         cl.Name = dto.Name;
                         cl.Information = dto.Information;
                     }
@@ -128,21 +133,25 @@ namespace Kasir.Application.Words.Commands.Update
                 }
                 foreach (var wordImage in request.WordImageDtos.Where(wid=>entity.WordImages.Select(wi=>wi.CountryId).Contains(wid.CountryId)== false))
                 {
-                    var wordImageRes = await mediator.Send(new AddWordCountryImageCommand { WordImage = wordImage.WordImage });
-
-                    if (wordImageRes.Succeeded == false)
+                    if (wordImage.WordImage != null)
                     {
-                        logger.LogWarning("Image Upload Failed: " + wordImageRes.Error.Message);
-                    }
-                    else
-                    {
-                        entity.WordImages.Add(new WordImage
+                        var wordImageRes = await mediator.Send(new UpdateWordCountryImageCommand
                         {
-                            CountryId = wordImage.CountryId,
-                            ImageName = wordImageRes.Data,
+                            WordImage = wordImage.WordImage,
                         });
+                        if (wordImageRes.Succeeded == false)
+                        {
+                            logger.LogWarning("Image Upload Failed: " + wordImageRes.Error.Message);
+                        }
+                        else
+                        {
+                            entity.WordImages.Add(new WordImage
+                            {
+                                CountryId = wordImage.CountryId,
+                                ImageName = wordImageRes.Data,
+                            });
+                        }
                     }
-
                 }
             }
 

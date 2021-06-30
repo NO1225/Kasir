@@ -17,6 +17,9 @@
                 @Html.DisplayNameFor(model => model.ImagePath)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -37,6 +40,9 @@
             <tr>
                 <td>
                     <img width="50" height="50" src="@UploadDownloadHelper.ShowWordImage(item.ImagePath)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)

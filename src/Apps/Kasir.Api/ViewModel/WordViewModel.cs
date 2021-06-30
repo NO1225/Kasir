@@ -7,6 +7,9 @@ namespace Kasir.Api.ViewModel
     {
         public int Id { get; set; }
 
+        [Display(Name = "Default Title")]
+        public string Title { get;  set; }
+
         [Display(Name = "Default Name")]
         public string Name { get; set; }
 
@@ -19,6 +22,5 @@ namespace Kasir.Api.ViewModel
         public List<WordLanguageViewModel> WordLanguageViewModels { get; set; }
 
         public List<WordImageViewModel> WordImageViewModels { get; set; }
-
     }
 }

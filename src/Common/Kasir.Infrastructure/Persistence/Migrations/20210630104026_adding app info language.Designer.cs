@@ -4,14 +4,16 @@ using Kasir.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Kasir.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210630104026_adding app info language")]
+    partial class addingappinfolanguage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -638,7 +640,7 @@ namespace Kasir.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Kasir.Domain.Entities.Language", "Language")
-                        .WithMany("AppInfoLanguages")
+                        .WithMany()
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -770,8 +772,6 @@ namespace Kasir.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Kasir.Domain.Entities.Language", b =>
                 {
-                    b.Navigation("AppInfoLanguages");
-
                     b.Navigation("CountryLanguages");
 
                     b.Navigation("WordLanguages");

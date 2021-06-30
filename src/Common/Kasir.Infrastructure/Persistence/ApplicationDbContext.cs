@@ -38,6 +38,8 @@ namespace Kasir.Infrastructure.Persistence
         public DbSet<Word> Words { get; set; }
         public DbSet<WordImage> WordImages { get; set; }
         public DbSet<WordLanguage> WordLanguages { get; set; }
+        public DbSet<AppInfo> AppInfos { get; set; }
+        public DbSet<AppInfoLanguage> AppInfoLanguages { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

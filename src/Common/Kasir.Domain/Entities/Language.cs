@@ -10,6 +10,7 @@ namespace Kasir.Domain.Entities
         {
             WordLanguages = new HashSet<WordLanguage>();
             CountryLanguages = new HashSet<CountryLanguage>();
+            AppInfoLanguages = new HashSet<AppInfoLanguage>();
         }
         [Required]
         [MaxLength(100)]
@@ -22,6 +23,7 @@ namespace Kasir.Domain.Entities
         public ICollection<WordLanguage> WordLanguages { get; set; }
 
         public ICollection<CountryLanguage> CountryLanguages { get; set; }
+        public ICollection<AppInfoLanguage> AppInfoLanguages { get; set; }
 
     }
 }
