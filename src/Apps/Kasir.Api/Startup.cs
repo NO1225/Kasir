@@ -67,6 +67,7 @@ namespace Kasir.Api
                         builder.AllowAnyMethod();
                     });
             });
+            services.AddHostedService<NotificationsCleanUpService>();
 
         }
 

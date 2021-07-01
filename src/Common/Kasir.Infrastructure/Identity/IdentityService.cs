@@ -76,7 +76,7 @@ namespace Kasir.Infrastructure.Identity
 
             return await _userManager.IsInRoleAsync(user, role);
         }
-        
+
         public bool IsSignedIn(ClaimsPrincipal principal)
         {
             return _signInManager.IsSignedIn(principal);
@@ -130,5 +130,12 @@ namespace Kasir.Infrastructure.Identity
 
             return roles;
         }
+
+        public async Task<IdentityResult> ChangePasswordAsync(string userId, string oldPassword, string newPassword)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
+
     }
 }

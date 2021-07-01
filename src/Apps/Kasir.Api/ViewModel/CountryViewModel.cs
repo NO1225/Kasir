@@ -7,10 +7,10 @@ namespace Kasir.Api.ViewModel
     {
         public int Id { get; set; }
 
-        [Display(Name = "Name")]
+        [Display(Name = "الاسم")]
         public string Name { get; set; }
 
-        [Display(Name = "Image")]
+        [Display(Name = "الصورة")]
         public string ImagePath { get; set; }
 
         public List<CountryLanguageViewModel> CountryLanguageViewModels { get; set; }

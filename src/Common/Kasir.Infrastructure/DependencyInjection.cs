@@ -52,6 +52,7 @@ namespace Kasir.Infrastructure
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
+            services.AddScoped<INotificationService, NotificationService>();
             services.AddTransient<IHttpClientHandler, HttpClientHandler>();
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddTransient<IIdentityService, IdentityService>();

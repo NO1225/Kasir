@@ -6,10 +6,10 @@ namespace Kasir.Api.ViewModel
     {
         public int CountryId { get; set; }
 
-        [Display(Name = "Country")]
+        [Display(Name = "البلد")]
         public string Country { get; set; }
 
-        [Display(Name = "Image")]
+        [Display(Name = "الصورة")]
         public string ImagePath { get; set; }
 
     }

@@ -19,5 +19,5 @@ namespace Kasir.Application.Dto
         {
             config.NewConfig<Country, CountryDto>();
         }
-    }
+    }    
 }

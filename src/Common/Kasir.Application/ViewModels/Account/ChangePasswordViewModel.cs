@@ -11,6 +11,7 @@ namespace Kasir.Application.ViewModels
 
         [Required]
         [Display(Name = "كلمة المرور الجديدة")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")]
         public string NewPassword { get; set; }
 
         [Required]

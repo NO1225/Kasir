@@ -10,5 +10,5 @@ namespace Kasir.Domain.Entities
             AppInfoLanguages = new List<AppInfoLanguage>();
         }
         public ICollection<AppInfoLanguage> AppInfoLanguages { get; set; }
-    }
+    }   
 }

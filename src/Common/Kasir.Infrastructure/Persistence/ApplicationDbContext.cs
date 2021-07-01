@@ -40,6 +40,9 @@ namespace Kasir.Infrastructure.Persistence
         public DbSet<WordLanguage> WordLanguages { get; set; }
         public DbSet<AppInfo> AppInfos { get; set; }
         public DbSet<AppInfoLanguage> AppInfoLanguages { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<PushTicket> PushTickets { get; set; }
+        public DbSet<PushToken> PushTokens { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

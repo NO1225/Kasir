@@ -12,10 +12,12 @@ namespace Kasir.Api.Controllers.Web
     public class AccountController : BaseWebController
     {
         private readonly IIdentityService identityService;
+        private readonly ICurrentUserService currentUserService;
 
-        public AccountController(IIdentityService identityService)
+        public AccountController(IIdentityService identityService, ICurrentUserService currentUserService)
         {
             this.identityService = identityService;
+            this.currentUserService = currentUserService;
         }
 
         [AllowAnonymous]
@@ -70,17 +72,17 @@ namespace Kasir.Api.Controllers.Web
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePassword)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    var user = await userManager.GetUserAsync(User);
-            //    var result = await userManager.ChangePasswordAsync(user, changePassword.OldPassword, changePassword.NewPassword);
+            if (ModelState.IsValid)
+            {
+                var userId = User.Claims.FirstOrDefault(c=>c.Type == "sub")?.Value;
+                var result = await identityService.ChangePasswordAsync(userId, changePassword.OldPassword, changePassword.NewPassword);
 
-            //    if (result.Succeeded)
-            //    {
-            //        return RedirectToAction(nameof(Manage));
-            //    }
-            //    ModelState.AddModelError("OldPassword", string.Join('\n', result.Errors.Select(e => e.Description)));
-            //}
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(Manage));
+                }
+                ModelState.AddModelError("OldPassword", string.Join('\n', result.Errors.Select(e => e.Description)));
+            }
             return View(changePassword);
         }
 

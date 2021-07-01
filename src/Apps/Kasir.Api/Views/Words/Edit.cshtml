@@ -5,9 +5,8 @@
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>تعديل كلمة</h1>
 
-<h4>WordViewModel</h4>
 <hr />
 <div>
     <form asp-action="Edit" class="row" enctype="multipart/form-data">
@@ -35,11 +34,11 @@
                 <img width="200" height="200" src="@UploadDownloadHelper.ShowWordImage(Model.ImagePath)" />
             </div>
             <div class="form-group">
-                <label class="control-label">Image</label>
+                <label class="control-label">الصورة</label>
                 <input name="WordImage" type="file" accept="image/*" class="form-control" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="تأكيد" class="btn btn-primary" />
             </div>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -52,21 +51,21 @@
                        value="@lang.Id" />
                 </div>
                 <label class="control-label">@lang.Name</label>
-                
+
                 <div class="form-group">
-                    <label class="control-label">Title</label>
+                    <label class="control-label">العنوان</label>
                     <input required name="WordLanguageDtos[@i].Title"
                        value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordTitle"
                        class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Name</label>
+                    <label class="control-label">الكلمة</label>
                     <input required name="WordLanguageDtos[@i].Name"
                        value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordName"
                        class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Information</label>
+                    <label class="control-label">التفاصيل</label>
                     <input required name="WordLanguageDtos[@i].Information"
                        value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordInformation"
                        class="form-control" />
@@ -83,19 +82,20 @@
                        value="@country.Id" />
                 </div>
                 <div class="form-group">
+                    <label class="control-label">@country.Name</label>
+
+                </div>
+                <div class="form-group">
                     @if (Model.WordImageViewModels.FirstOrDefault(cl => cl.CountryId == country.Id)?.ImagePath == null)
                     {
-                        <p>No Image</p>
+                        <p>لا يوجد صورة</p>
                     }
                     else
                     {
                         <img width="100" height="100" src="@UploadDownloadHelper.ShowWordImage(Model.WordImageViewModels.FirstOrDefault(cl=>cl.CountryId == country.Id)?.ImagePath)" />
 
                     }
-                </div>
-                <div class="form-group">
-                    <label class="control-label">@country.Name</label>
-                    <input type="file" name="WordImageDtos[@i].WordImage" accept="image/*"  class="form-control" />
+                    <input type="file" name="WordImageDtos[@i].WordImage" accept="image/*" class="form-control" />
                 </div>
             }
         </div>
@@ -103,7 +103,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">رجوع</a>
 </div>
 
 @section Scripts {

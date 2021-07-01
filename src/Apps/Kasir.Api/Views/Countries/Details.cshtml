@@ -5,10 +5,9 @@
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>تفاصيل البلد</h1>
 
 <div>
-    <h4>CountryViewModel</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -36,6 +35,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id  }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.Id  }) |
+    <a asp-action="Index">رجوع</a>
 </div>

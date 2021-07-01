@@ -5,10 +5,9 @@
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>تفاصيل الكلمة</h1>
 
 <div>
-    <h4>WordViewModel</h4>
     <hr />
     <div class="row">
         <div class="col-md-12 col-lg-6 col-xl-4">
@@ -52,19 +51,19 @@
                     <dd class="col-sm-8">
                     </dd>
                     <dt class="col-sm-4">
-                        Title
+                        العنوان
                     </dt>
                     <dd class="col-sm-8">
                         @Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordTitle
                     </dd>
                     <dt class="col-sm-4">
-                        Name
+                        الكلمة
                     </dt>
                     <dd class="col-sm-8">
                         @Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordName
                     </dd>
                     <dt class="col-sm-4">
-                        Information
+                        التفاصيل
                     </dt>
                     <dd class="col-sm-8">
                         @Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordInformation
@@ -83,7 +82,7 @@
                     <dd class="col-sm-8">
                         @if (Model.WordImageViewModels.FirstOrDefault(cl => cl.CountryId == country.Id)?.ImagePath == null)
                         {
-                            <p>No Image</p>
+                            <p>لا يوجد صورة</p>
                         }
                         else
                         {
@@ -99,6 +98,6 @@
 
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">رجوع</a>
 </div>

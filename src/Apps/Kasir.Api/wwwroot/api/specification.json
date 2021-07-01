@@ -120,6 +120,38 @@
         }
       }
     },
+    "/api/Auth/AddPushToken": {
+      "post": {
+        "tags": [
+          "PushTokens"
+        ],
+        "operationId": "PushTokens_AddPushToken",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePushTokenCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceResult_1OfOfPushTokenAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_null"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Words/GetAll": {
       "get": {
         "tags": [
@@ -379,6 +411,47 @@
             "nullable": true
           },
           "password": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ServiceResult_1OfOfPushTokenAndApplicationAnd_0AndCulture_neutralAndPublicKeyToken_null": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ServiceResult"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/PushToken"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "PushToken": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreatePushTokenCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "token": {
             "type": "string",
             "nullable": true
           }

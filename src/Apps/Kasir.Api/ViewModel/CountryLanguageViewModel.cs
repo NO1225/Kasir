@@ -6,10 +6,10 @@ namespace Kasir.Api.ViewModel
     {
         public int LanguageId { get; set; }
 
-        [Display(Name = "Language")]
+        [Display(Name = "اللغة")]
         public string Language { get; set; }
 
-        [Display(Name = "Name")]
+        [Display(Name = "الاسم")]
         public string CountryName { get; set; }
 
     }

@@ -9,6 +9,6 @@ namespace Kasir.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Language> builder)
         {
         }
-    }
+    }  
 
 }

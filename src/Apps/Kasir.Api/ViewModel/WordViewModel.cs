@@ -7,16 +7,16 @@ namespace Kasir.Api.ViewModel
     {
         public int Id { get; set; }
 
-        [Display(Name = "Default Title")]
+        [Display(Name = "العنوان الافتراضي")]
         public string Title { get;  set; }
 
-        [Display(Name = "Default Name")]
+        [Display(Name = "الكلمة الافتراضي")]
         public string Name { get; set; }
 
-        [Display(Name = "Default Image")]
+        [Display(Name = "الصورة الافتراضية")]
         public string ImagePath { get; set; }
 
-        [Display(Name = "Default Info")]
+        [Display(Name = "التفاصيل الافتراضية")]
         public string Information { get; set; }
 
         public List<WordLanguageViewModel> WordLanguageViewModels { get; set; }

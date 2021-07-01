@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>البلدان</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">اضافة بلد</a>
 </p>
 <table class="table">
     <thead>
@@ -44,9 +44,9 @@
             </td>                    
                 }
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                <a href="#" onclick="removeButton(@item.Id)">Delete</a>
+                @Html.ActionLink("تعديل", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("التفاصيل", "Details", new { id=item.Id }) |
+                <a href="#" onclick="removeButton(@item.Id)">حذف</a>
             </td>
         </tr>
 }

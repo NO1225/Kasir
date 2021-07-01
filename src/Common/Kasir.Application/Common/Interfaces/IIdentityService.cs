@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Kasir.Application.Common.Models;
 using Kasir.Application.Dto;
 using Kasir.Domain.Enums;
+using Microsoft.AspNetCore.Identity;
 
 namespace Kasir.Application.Common.Interfaces
 {
@@ -22,5 +23,6 @@ namespace Kasir.Application.Common.Interfaces
         Task<Result> DeleteUserAsync(string userId);
         bool IsSignedIn(ClaimsPrincipal principal);
         Task SignOutAsync();
+        Task<IdentityResult> ChangePasswordAsync(string userId, string oldPassword, string newPassword);
     }
 }

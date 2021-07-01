@@ -122,6 +122,40 @@ namespace Kasir.Infrastructure.Persistence.Migrations
                     b.ToTable("PersistedGrants");
                 });
 
+            modelBuilder.Entity("Kasir.Domain.Entities.Announcement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Modifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Announcements");
+                });
+
             modelBuilder.Entity("Kasir.Domain.Entities.AppInfo", b =>
                 {
                     b.Property<int>("Id")
@@ -295,6 +329,72 @@ namespace Kasir.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+                });
+
+            modelBuilder.Entity("Kasir.Domain.Entities.PushTicket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Modifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PushTokenId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReceiptId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PushTokenId");
+
+                    b.ToTable("PushTickets");
+                });
+
+            modelBuilder.Entity("Kasir.Domain.Entities.PushToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Modifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Valid")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PushTokens");
                 });
 
             modelBuilder.Entity("Kasir.Domain.Entities.Word", b =>
@@ -667,6 +767,17 @@ namespace Kasir.Infrastructure.Persistence.Migrations
                     b.Navigation("Language");
                 });
 
+            modelBuilder.Entity("Kasir.Domain.Entities.PushTicket", b =>
+                {
+                    b.HasOne("Kasir.Domain.Entities.PushToken", "PushToken")
+                        .WithMany("PushTickets")
+                        .HasForeignKey("PushTokenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PushToken");
+                });
+
             modelBuilder.Entity("Kasir.Domain.Entities.WordImage", b =>
                 {
                     b.HasOne("Kasir.Domain.Entities.Country", "Country")
@@ -775,6 +886,11 @@ namespace Kasir.Infrastructure.Persistence.Migrations
                     b.Navigation("CountryLanguages");
 
                     b.Navigation("WordLanguages");
+                });
+
+            modelBuilder.Entity("Kasir.Domain.Entities.PushToken", b =>
+                {
+                    b.Navigation("PushTickets");
                 });
 
             modelBuilder.Entity("Kasir.Domain.Entities.Word", b =>

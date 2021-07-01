@@ -23,6 +23,12 @@ namespace Kasir.Application.Common.Interfaces
 
         DbSet<AppInfoLanguage> AppInfoLanguages { get; set; }
 
+        DbSet<Announcement> Announcements { get; set; }
+
+        DbSet<PushTicket> PushTickets { get; set; }
+
+        DbSet<PushToken> PushTokens { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

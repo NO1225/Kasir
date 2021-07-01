@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Kasir.Api.Controllers.Web
 {
+    [Authorize(AuthenticationSchemes = "Identity.Application")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public abstract class BaseWebController : Controller
     {

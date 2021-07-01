@@ -10,6 +10,8 @@
 
         public static class Auth
         {
+            public const string AddPushToken = "api/" + nameof(Auth) + "/AddPushToken";
+
         }
 
         public static class Token
