@@ -23,9 +23,9 @@ namespace Kasir.Application.Files.Commands
 
         public async Task<ServiceResult<string>> Handle(AddWordCountryImageCommand request, CancellationToken cancellationToken)
         {
-            int _maxFileSize = 2 * 1024 * 1024;
-            int _minWidth = 450;
-            int _minHeight = 450;
+            int _maxFileSize = 8 * 1024 * 1024;
+            int _minWidth = 0;
+            int _minHeight = 0;
             int _resizeTo = 450;
             string _imagesFolderPath = UploadDownloadHelper.WORD_IMAGE_FOLDER_PATH;
 

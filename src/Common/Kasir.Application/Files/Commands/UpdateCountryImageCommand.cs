@@ -29,9 +29,9 @@ namespace Kasir.Application.Files.Commands
         }
         public async Task<ServiceResult<string>> Handle(UpdateCountryImageCommand request, CancellationToken cancellationToken)
         {
-            int _maxFileSize = 2 * 1024 * 1024;
-            int _minWidth = 350;
-            int _minHeight = 350;
+            int _maxFileSize = 8 * 1024 * 1024;
+            int _minWidth = 0;
+            int _minHeight = 0;
             int _resizeTo = 350;
             string _imagesFolderPath = UploadDownloadHelper.COUNTRY_IMAGE_FOLDER_PATH;
 

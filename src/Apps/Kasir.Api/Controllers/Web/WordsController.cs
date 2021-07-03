@@ -96,10 +96,8 @@ namespace Kasir.Api.Controllers.Web
             }
             else
             {
-                await AddLanguagesAsync();
-                await AddCountriesAsync();
+                return RedirectToAction("Create");
 
-                return View(command);
             }
         }
 
