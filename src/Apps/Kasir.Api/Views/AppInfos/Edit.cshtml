@@ -28,7 +28,9 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">الكلمة الترحيبية</label>
-                    <input required name="AppInfoLanguageDtos[@i].Welcome" class="form-control" value="@Model.AppInfoLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.Welcome" />
+                    <textarea required name="AppInfoLanguageDtos[@i].Welcome" class="form-control">
+                        @Model.AppInfoLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.Welcome
+                    </textarea>
                 </div>
                 <div class="form-group">
                     <label class="control-label">تعميم</label>
@@ -36,7 +38,9 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">التفاصيل</label>
-                    <input required name="AppInfoLanguageDtos[@i].Description" class="form-control" value="@Model.AppInfoLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.Description" />
+                    <textarea required name="AppInfoLanguageDtos[@i].Description" class="form-control">
+                        @Model.AppInfoLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.Description
+                    </textarea>
                 </div>
             }
             <div class="form-group">
