@@ -28,6 +28,18 @@
                 الكلمة الترحيبية
             </dt>
             <dd class="col-sm-10">
+                @Model.AppInfoLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.Welcome
+            </dd>
+            <dt class="col-sm-2">
+               التعميم
+            </dt>
+            <dd class="col-sm-10">
+                @Model.AppInfoLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.Disclaimer
+            </dd>
+            <dt class="col-sm-2">
+               التفاصيل
+            </dt>
+            <dd class="col-sm-10">
                 @Model.AppInfoLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.Description
             </dd>
         }

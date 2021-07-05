@@ -13,17 +13,17 @@
         <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
+                <label asp-for="Title" class="control-label">Default WS Name</label>
                 <input required asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Default Dsc Code</label>
                 <input required asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Information" class="control-label"></label>
+                <label asp-for="Information" class="control-label">Default Dsc Details</label>
                 <input required asp-for="Information" class="form-control" />
                 <span asp-validation-for="Information" class="text-danger"></span>
             </div>
@@ -48,15 +48,15 @@
                 <label class="control-label">@lang.Name</label>
                 
                 <div class="form-group">
-                    <label class="control-label">العنوان</label>
+                    <label class="control-label">WS Name</label>
                     <input required name="WordLanguageDtos[@i].Title" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label class="control-label">الكلمة</label>
+                    <label class="control-label">Dsc Code</label>
                     <input required name="WordLanguageDtos[@i].Name" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label class="control-label">التفاصيل</label>
+                    <label class="control-label">Dsc Details</label>
                     <input required name="WordLanguageDtos[@i].Information" class="form-control" />
                 </div>
             }

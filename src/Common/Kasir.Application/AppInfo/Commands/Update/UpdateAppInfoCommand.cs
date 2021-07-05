@@ -56,6 +56,8 @@ namespace Kasir.Application.AppInfos.Commands.Update
                     {
                         cl.Title = dto.Title;
                         cl.Description = dto.Description;
+                        cl.Disclaimer = dto.Disclaimer;
+                        cl.Welcome = dto.Welcome;
                     }
                 }
             }

@@ -227,6 +227,14 @@
           "description": {
             "type": "string",
             "nullable": true
+          },
+          "disclaimer": {
+            "type": "string",
+            "nullable": true
+          },
+          "welcome": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

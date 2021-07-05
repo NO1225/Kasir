@@ -15,5 +15,12 @@ namespace Kasir.Api.ViewModel
 
         [Display(Name = "التفاصيل")]
         public string Description { get; set; }
+
+        [Display(Name = "تعميم")]
+        public string Disclaimer { get; set; }
+
+
+        [Display(Name = "ترحيب")]
+        public string Welcome { get; set; }
     }
 }

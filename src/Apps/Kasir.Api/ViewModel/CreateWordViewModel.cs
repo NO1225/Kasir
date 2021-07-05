@@ -20,7 +20,7 @@ namespace Kasir.Api.ViewModel
 
         public List<CreateWordImage> WordImageDtos { get; set; }
 
-        [Display(Name = "الصورة الافتراضية")]
+        [Display(Name = "Default Image")]
         public IFormFile WordImage { get; set; }
     }
 }

@@ -28,6 +28,14 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">الكلمة الترحيبية</label>
+                    <input required name="AppInfoLanguageDtos[@i].Welcome" class="form-control" value="@Model.AppInfoLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.Welcome" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">تعميم</label>
+                    <input required name="AppInfoLanguageDtos[@i].Disclaimer" class="form-control" value="@Model.AppInfoLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.Disclaimer" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">التفاصيل</label>
                     <input required name="AppInfoLanguageDtos[@i].Description" class="form-control" value="@Model.AppInfoLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.Description" />
                 </div>
             }

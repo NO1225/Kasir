@@ -47,6 +47,8 @@ namespace Kasir.Api.Controllers.Web
                     Title = cl.Title,
                     Language = cl.Language.Name,
                     LanguageId = cl.LanguageId,
+                    Disclaimer = cl.Disclaimer,
+                    Welcome = cl.Welcome
                 }).ToList()
             });
         }
@@ -76,6 +78,8 @@ namespace Kasir.Api.Controllers.Web
                     Title = cl.Title,
                     Language = cl.Language.Name,
                     LanguageId = cl.LanguageId,
+                    Disclaimer = cl.Disclaimer,
+                    Welcome = cl.Welcome
                 }).ToList()
             });
         }

@@ -39,7 +39,13 @@ namespace Kasir.Application.AppInfos.Queries.GetAppInfo
                     : c.AppInfoLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Title,
                     Description = c.AppInfoLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null
                     ? "Kasir"
-                    : c.AppInfoLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Description
+                    : c.AppInfoLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Description,
+                    Disclaimer = c.AppInfoLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null
+                    ? "Kasir"
+                    : c.AppInfoLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Disclaimer,
+                    Welcome = c.AppInfoLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null
+                    ? "Kasir"
+                    : c.AppInfoLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Welcome
                 })
                 .FirstOrDefaultAsync(cancellationToken);
 

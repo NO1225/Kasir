@@ -34,7 +34,7 @@
                 <img width="200" height="200" src="@UploadDownloadHelper.ShowWordImage(Model.ImagePath)" />
             </div>
             <div class="form-group">
-                <label class="control-label">الصورة</label>
+                <label class="control-label">Default Image</label>
                 <input name="WordImage" type="file" accept="image/*" class="form-control" />
             </div>
             <div class="form-group">
@@ -53,19 +53,19 @@
                 <label class="control-label">@lang.Name</label>
 
                 <div class="form-group">
-                    <label class="control-label">العنوان</label>
+                    <label class="control-label">WS Name</label>
                     <input required name="WordLanguageDtos[@i].Title"
                        value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordTitle"
                        class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label class="control-label">الكلمة</label>
+                    <label class="control-label">Dsc Code</label>
                     <input required name="WordLanguageDtos[@i].Name"
                        value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordName"
                        class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label class="control-label">التفاصيل</label>
+                    <label class="control-label">Dsc Details</label>
                     <input required name="WordLanguageDtos[@i].Information"
                        value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordInformation"
                        class="form-control" />
