@@ -33,6 +33,7 @@ namespace Kasir.Application.Words.Queries.GetWords
             List<WordDto> list = await _context.Words
                 .Include(w => w.WordLanguages)
                 .Include(w => w.WordImages)
+                .Where(w => w.WordImages.Any(wi => wi.CountryId == request.CountryId))
                 .Select(c => new WordDto
                 {
                     CreateDate = c.CreateDate,
@@ -43,8 +44,8 @@ namespace Kasir.Application.Words.Queries.GetWords
                     Title = c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null
                     ? c.Name
                     : c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Title,
-                    Name = c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null 
-                    ? c.Name 
+                    Name = c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null
+                    ? c.Name
                     : c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Name,
                     Information = c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null
                     ? c.Information

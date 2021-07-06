@@ -11,6 +11,6 @@ namespace Kasir.Api.ViewModel
 
         [Display(Name = "الصورة")]
         public string ImagePath { get; set; }
-
+        public int Id { get; internal set; }
     }
 }

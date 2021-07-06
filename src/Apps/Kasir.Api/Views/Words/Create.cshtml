@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="WordImage" class="control-label"></label>
-                <input asp-for="WordImage" accept="image/*" class="form-control" />
+                <input required asp-for="WordImage" accept="image/*" class="form-control" />
                 <span asp-validation-for="WordImage" class="text-danger"></span>
             </div>
             <div class="form-group">

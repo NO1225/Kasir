@@ -87,7 +87,8 @@ namespace Kasir.Api.Controllers.Web
                 }).ToList(),
                 WordLanguageDtos = viewModel.WordLanguageDtos,
             };
-            command.AddWordImage(new FormFileProxy(viewModel.WordImage));
+            if (viewModel.WordImage != null)
+                command.AddWordImage(new FormFileProxy(viewModel.WordImage));
             var result = await Mediator.Send(command);
 
             if (result.Succeeded)
@@ -181,10 +182,19 @@ namespace Kasir.Api.Controllers.Web
         {
             var result = await Mediator.Send(new DeleteWordCommand { Id = id });
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DeleteWordImage(int id, int wordId)
+        {
+            var result = await Mediator.Send(new DeleteWordImageCommand { Id = id });
+
+            return RedirectToAction(nameof(Details), new { id = wordId });
+
+
+        }
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -206,13 +216,13 @@ namespace Kasir.Api.Controllers.Web
             return View(new WordViewModel
             {
                 Id = Word.Id,
-                Title = Word.Title, 
+                Title = Word.Title,
                 Name = Word.Name,
                 Information = Word.Information,
                 ImagePath = Word.ImageName,
                 WordLanguageViewModels = Word.WordLanguages.Select(cl => new WordLanguageViewModel
                 {
-                    WordTitle = cl.Title, 
+                    WordTitle = cl.Title,
                     WordName = cl.Name,
                     WordInformation = cl.Information,
                     Language = cl.Language.Name,
@@ -220,6 +230,7 @@ namespace Kasir.Api.Controllers.Web
                 }).ToList(),
                 WordImageViewModels = Word.WordImages.Select(cl => new WordImageViewModel
                 {
+                    Id = cl.Id,
                     ImagePath = cl.ImageName,
                     Country = cl.Country.Name,
                     CountryId = cl.CountryId,

@@ -68,14 +68,18 @@ namespace Kasir.Application.Words.Commands.Create
                 WordImages = new List<WordImage>()
             };
 
-            var res = await mediator.Send(new AddWordCountryImageCommand { WordImage = request.WordImage });
-
-            if (res.Succeeded == false)
+            if (request.WordImage != null)
             {
-                return new ServiceResult<WordDto>(res.Error);
-            }
 
-            entity.ImageName = res.Data;
+                var res = await mediator.Send(new AddWordCountryImageCommand { WordImage = request.WordImage });
+
+                if (res.Succeeded == false)
+                {
+                    return new ServiceResult<WordDto>(res.Error);
+                }
+
+                entity.ImageName = res.Data;
+            }
 
             foreach (var wordImage in request.WordImageDtos)
             {
