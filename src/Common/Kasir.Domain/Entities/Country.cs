@@ -9,7 +9,7 @@ namespace Kasir.Domain.Entities
         public Country()
         {
             CountryLanguages = new HashSet<CountryLanguage>();
-            WordImages = new HashSet<WordImage>();
+            WordCountries = new HashSet<WordCountry>();
         }
 
         [Required]
@@ -22,7 +22,7 @@ namespace Kasir.Domain.Entities
 
         public ICollection<CountryLanguage> CountryLanguages { get; set; }
 
-        public ICollection<WordImage> WordImages { get; set; }
+        public ICollection<WordCountry> WordCountries { get; set; }
 
     }
 }

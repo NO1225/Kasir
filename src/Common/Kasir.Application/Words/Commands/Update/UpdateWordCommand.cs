@@ -19,15 +19,11 @@ namespace Kasir.Application.Words.Commands.Update
     {
         public int Id { get; set; }
 
-        public string Title { get; set; }
-
         public string Name { get; set; }
-
-        public string Information { get; set; }
 
         public List<WordLanguageDto> WordLanguageDtos { get; set; }
 
-        public List<WordImageDto> WordImageDtos { get; set; }
+        public List<WordCountryDto> WordCountryDtos { get; set; }
 
         internal IFileStream WordImage;
 
@@ -59,7 +55,7 @@ namespace Kasir.Application.Words.Commands.Update
         {
             var entity = await _context.Words
                 .Include(c => c.WordLanguages)
-                .Include(c => c.WordImages)
+                .Include(c => c.WordCountries)
                 .FirstOrDefaultAsync(c => c.Id == request.Id);
 
             if (entity == null)
@@ -67,14 +63,9 @@ namespace Kasir.Application.Words.Commands.Update
                 throw new NotFoundException(nameof(Country), request.Id);
             }
 
-            if (!string.IsNullOrEmpty(request.Title))
-                entity.Title = request.Title;
-
             if (!string.IsNullOrEmpty(request.Name))
                 entity.Name = request.Name;
 
-            if (!string.IsNullOrEmpty(request.Information))
-                entity.Information = request.Information;
 
             if (request.WordLanguageDtos != null && request.WordLanguageDtos.Count > 0)
             {
@@ -84,7 +75,6 @@ namespace Kasir.Application.Words.Commands.Update
                     if (dto != null)
                     {
                         cl.Title = dto.Title;
-                        cl.Name = dto.Name;
                         cl.Information = dto.Information;
                     }
                 }
@@ -106,52 +96,26 @@ namespace Kasir.Application.Words.Commands.Update
                 entity.ImageName = res.Data;
             }
 
-            if (request.WordImageDtos != null && request.WordImageDtos.Count > 0)
+            if (request.WordCountryDtos != null && request.WordCountryDtos.Count > 0)
             {
-                foreach (var wi in entity.WordImages)
+                foreach (var wc in entity.WordCountries)
                 {
-                    var dto = request.WordImageDtos.FirstOrDefault(cldd => cldd.CountryId == wi.CountryId);
+                    var dto = request.WordCountryDtos.FirstOrDefault(cldd => cldd.CountryId == wc.CountryId);
                     if (dto != null)
                     {
-                        if (dto.WordImage != null)
+                        if (dto.Checked != "on")
                         {
-                            var wordImageRes = await mediator.Send(new UpdateWordCountryImageCommand
-                            {
-                                OldImageName = wi.ImageName,
-                                WordImage = dto.WordImage,
-                            });
-                            if (wordImageRes.Succeeded == false)
-                            {
-                                logger.LogWarning("Image Upload Failed: " + wordImageRes.Error.Message);
-                            }
-                            else
-                            {
-                                wi.ImageName = wordImageRes.Data;
-                            }
+                           _context.WordCountries.Remove(wc);
                         }
                     }
                 }
-                foreach (var wordImage in request.WordImageDtos.Where(wid=>entity.WordImages.Select(wi=>wi.CountryId).Contains(wid.CountryId)== false))
+                foreach (var wordCountry in request.WordCountryDtos.Where(wcd=>wcd.Checked == "on"
+                && entity.WordCountries.Select(wi=>wi.CountryId).Contains(wcd.CountryId)== false))
                 {
-                    if (wordImage.WordImage != null)
+                    entity.WordCountries.Add(new WordCountry
                     {
-                        var wordImageRes = await mediator.Send(new UpdateWordCountryImageCommand
-                        {
-                            WordImage = wordImage.WordImage,
-                        });
-                        if (wordImageRes.Succeeded == false)
-                        {
-                            logger.LogWarning("Image Upload Failed: " + wordImageRes.Error.Message);
-                        }
-                        else
-                        {
-                            entity.WordImages.Add(new WordImage
-                            {
-                                CountryId = wordImage.CountryId,
-                                ImageName = wordImageRes.Data,
-                            });
-                        }
-                    }
+                        CountryId = wordCountry.CountryId,
+                    });
                 }
             }
 

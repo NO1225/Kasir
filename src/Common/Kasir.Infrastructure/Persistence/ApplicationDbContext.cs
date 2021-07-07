@@ -36,7 +36,7 @@ namespace Kasir.Infrastructure.Persistence
         public DbSet<CountryLanguage> CountryLanguages { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Word> Words { get; set; }
-        public DbSet<WordImage> WordImages { get; set; }
+        public DbSet<WordCountry> WordCountries { get; set; }
         public DbSet<WordLanguage> WordLanguages { get; set; }
         public DbSet<AppInfo> AppInfos { get; set; }
         public DbSet<AppInfoLanguage> AppInfoLanguages { get; set; }

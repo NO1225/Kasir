@@ -11,10 +11,6 @@ namespace Kasir.Application.Dto
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(100)]
-        public string Name { get; set; }
-
-        [Required]
         [MaxLength(450)]
         public string Information { get; set; }
     }

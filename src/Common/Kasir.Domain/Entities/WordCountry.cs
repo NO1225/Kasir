@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Kasir.Domain.Entities
 {
-    public class WordImage : AuditableEntity
+    public class WordCountry : AuditableEntity
     {
         public Word Word { get; set; }
 
@@ -14,9 +14,5 @@ namespace Kasir.Domain.Entities
 
         [Required]
         public int CountryId { get; set; }
-
-        [Required]
-        [MaxLength(400)]
-        public string ImageName { get; set; }
     }
 }

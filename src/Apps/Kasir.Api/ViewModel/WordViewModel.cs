@@ -7,20 +7,14 @@ namespace Kasir.Api.ViewModel
     {
         public int Id { get; set; }
 
-        [Display(Name = "Default WS Name")]
-        public string Title { get;  set; }
-
-        [Display(Name = "Default Dsc Code")]
+        [Display(Name = "Dsc Code")]
         public string Name { get; set; }
 
-        [Display(Name = "Default Image")]
+        [Display(Name = "Image")]
         public string ImagePath { get; set; }
-
-        [Display(Name = "Default Dsc Details")]
-        public string Information { get; set; }
 
         public List<WordLanguageViewModel> WordLanguageViewModels { get; set; }
 
-        public List<WordImageViewModel> WordImageViewModels { get; set; }
+        public List<WordCountryViewModel> WordCountryViewModels { get; set; }
     }
 }

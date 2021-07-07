@@ -32,8 +32,8 @@ namespace Kasir.Application.Countries.Queries.GetCountries
         {
             List<CountryDto> list = await _context.Countries
                 .Include(c => c.CountryLanguages)
-                .Include(c => c.WordImages)
-                .Where(c => c.WordImages.Count > 0)
+                .Include(c => c.WordCountries)
+                .Where(c => c.WordCountries.Count > 0)
                 .Select(c => new CountryDto
                 {
                     CreateDate = c.CreateDate,

@@ -15,7 +15,7 @@ namespace Kasir.Application.Common.Interfaces
 
         DbSet<Word> Words { get; set; }
 
-        DbSet<WordImage> WordImages { get; set; }
+        DbSet<WordCountry> WordCountries { get; set; }
 
         DbSet<WordLanguage> WordLanguages { get; set; }
 

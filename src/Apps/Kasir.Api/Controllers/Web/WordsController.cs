@@ -34,28 +34,25 @@ namespace Kasir.Api.Controllers.Web
             var models = await applicationDbContext.Words
                 .Include(c => c.WordLanguages)
                 .ThenInclude(c => c.Language)
-                .Include(c => c.WordImages)
+                .Include(c => c.WordCountries)
                 .ThenInclude(c => c.Country)
                 .Select(c => new WordViewModel
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    Title = c.Title,
-                    Information = c.Information,
                     ImagePath = c.ImageName,
                     WordLanguageViewModels = c.WordLanguages.Select(cl => new WordLanguageViewModel
                     {
                         WordTitle = cl.Title,
-                        WordName = cl.Name,
                         WordInformation = cl.Information,
                         Language = cl.Language.Name,
                         LanguageId = cl.LanguageId,
                     }).ToList(),
-                    WordImageViewModels = c.WordImages.Select(cl => new WordImageViewModel
+                    WordCountryViewModels = c.WordCountries.Select(cl => new WordCountryViewModel
                     {
-                        ImagePath = cl.ImageName,
                         Country = cl.Country.Name,
                         CountryId = cl.CountryId,
+                        Checked = true,
                     }).ToList()
                 }).ToListAsync();
 
@@ -77,14 +74,8 @@ namespace Kasir.Api.Controllers.Web
 
             var command = new CreateWordCommand
             {
-                Information = viewModel.Information,
-                Title = viewModel.Title,
                 Name = viewModel.Name,
-                WordImageDtos = viewModel.WordImageDtos.Select(wid => new WordImageDto
-                {
-                    CountryId = wid.CountryId,
-                    WordImage = wid.WordImage == null ? null : new FormFileProxy(wid.WordImage)
-                }).ToList(),
+                WordCountriesDtos = viewModel.WordCountryDtos,
                 WordLanguageDtos = viewModel.WordLanguageDtos,
             };
             if (viewModel.WordImage != null)
@@ -112,7 +103,7 @@ namespace Kasir.Api.Controllers.Web
             var Word = await applicationDbContext.Words
                 .Include(c => c.WordLanguages)
                 .ThenInclude(c => c.Language)
-                .Include(c => c.WordImages)
+                .Include(c => c.WordCountries)
                 .ThenInclude(c => c.Country)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -124,23 +115,20 @@ namespace Kasir.Api.Controllers.Web
             return View(new WordViewModel
             {
                 Id = Word.Id,
-                Title = Word.Title,
                 Name = Word.Name,
-                Information = Word.Information,
                 ImagePath = Word.ImageName,
                 WordLanguageViewModels = Word.WordLanguages.Select(cl => new WordLanguageViewModel
                 {
                     WordTitle = cl.Title,
-                    WordName = cl.Name,
                     WordInformation = cl.Information,
                     Language = cl.Language.Name,
                     LanguageId = cl.LanguageId,
                 }).ToList(),
-                WordImageViewModels = Word.WordImages.Select(cl => new WordImageViewModel
+                WordCountryViewModels = Word.WordCountries.Select(cl => new WordCountryViewModel
                 {
-                    ImagePath = cl.ImageName,
                     Country = cl.Country.Name,
                     CountryId = cl.CountryId,
+                    Checked = true
                 }).ToList()
             });
         }
@@ -151,14 +139,8 @@ namespace Kasir.Api.Controllers.Web
             var command = new UpdateWordCommand
             {
                 Id = viewModel.Id,
-                Title = viewModel.Title,
-                Information = viewModel.Information,
                 Name = viewModel.Name,
-                WordImageDtos = viewModel.WordImageDtos.Select(wid => new WordImageDto
-                {
-                    CountryId = wid.CountryId,
-                    WordImage = wid.WordImage == null ? null : new FormFileProxy(wid.WordImage)
-                }).ToList(),
+                WordCountryDtos = viewModel.WordCountryDtos,
                 WordLanguageDtos = viewModel.WordLanguageDtos,
             };
             if (viewModel.WordImage != null)
@@ -187,15 +169,6 @@ namespace Kasir.Api.Controllers.Web
         }
 
         [HttpGet]
-        public async Task<IActionResult> DeleteWordImage(int id, int wordId)
-        {
-            var result = await Mediator.Send(new DeleteWordImageCommand { Id = id });
-
-            return RedirectToAction(nameof(Details), new { id = wordId });
-
-
-        }
-        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             await AddLanguagesAsync();
@@ -204,7 +177,7 @@ namespace Kasir.Api.Controllers.Web
             var Word = await applicationDbContext.Words
                 .Include(c => c.WordLanguages)
                 .ThenInclude(c => c.Language)
-                .Include(c => c.WordImages)
+                .Include(c => c.WordCountries)
                 .ThenInclude(c => c.Country)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -216,24 +189,21 @@ namespace Kasir.Api.Controllers.Web
             return View(new WordViewModel
             {
                 Id = Word.Id,
-                Title = Word.Title,
                 Name = Word.Name,
-                Information = Word.Information,
                 ImagePath = Word.ImageName,
                 WordLanguageViewModels = Word.WordLanguages.Select(cl => new WordLanguageViewModel
                 {
                     WordTitle = cl.Title,
-                    WordName = cl.Name,
                     WordInformation = cl.Information,
                     Language = cl.Language.Name,
                     LanguageId = cl.LanguageId,
                 }).ToList(),
-                WordImageViewModels = Word.WordImages.Select(cl => new WordImageViewModel
+                WordCountryViewModels = Word.WordCountries.Select(cl => new WordCountryViewModel
                 {
                     Id = cl.Id,
-                    ImagePath = cl.ImageName,
                     Country = cl.Country.Name,
                     CountryId = cl.CountryId,
+                    Checked = true,
                 }).ToList()
             });
         }

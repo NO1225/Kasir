@@ -36,7 +36,7 @@ namespace Kasir.Application.Words.Commands.Delete
         public async Task<ServiceResult<WordDto>> Handle(DeleteWordCommand request, CancellationToken cancellationToken)
         {
             var entity = await _context.Words
-                .Include(w=>w.WordImages)
+                .Include(w=>w.WordCountries)
                 .Where(l => l.Id == request.Id)
                 .SingleOrDefaultAsync(cancellationToken);
 
@@ -50,11 +50,6 @@ namespace Kasir.Application.Words.Commands.Delete
             await _context.SaveChangesAsync(cancellationToken);
 
             await mediator.Send(new DeleteCountryImageCommand() { OldImageName = entity.ImageName });
-
-            foreach (var wordImage in entity.WordImages)
-            {
-                await mediator.Send(new DeleteCountryImageCommand() { OldImageName = wordImage.ImageName });
-            }
 
             return ServiceResult.Success(_mapper.Map<WordDto>(entity));
         }

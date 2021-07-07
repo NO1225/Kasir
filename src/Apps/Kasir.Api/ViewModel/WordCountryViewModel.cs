@@ -2,15 +2,15 @@
 
 namespace Kasir.Api.ViewModel
 {
-    public class WordImageViewModel
+    public class WordCountryViewModel
     {
         public int CountryId { get; set; }
 
         [Display(Name = "البلد")]
         public string Country { get; set; }
 
-        [Display(Name = "الصورة")]
-        public string ImagePath { get; set; }
-        public int Id { get; internal set; }
+        [Display(Name = "مضمنة")]
+        public bool Checked { get; set; }
+        public int Id { get; set; }
     }
 }

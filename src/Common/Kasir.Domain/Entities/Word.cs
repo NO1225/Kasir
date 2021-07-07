@@ -9,20 +9,12 @@ namespace Kasir.Domain.Entities
         public Word()
         {
             WordLanguages = new HashSet<WordLanguage>();
-            WordImages = new HashSet<WordImage>();
+            WordCountries = new HashSet<WordCountry>();
         }
 
         [Required]
         [MaxLength(100)]
-        public string Title { get; set; }
-
-        [Required]
-        [MaxLength(100)]
         public string Name { get; set; }
-
-        [Required]
-        [MaxLength(450)]
-        public string Information { get; set; }
 
         [Required]
         [MaxLength(400)]
@@ -30,6 +22,6 @@ namespace Kasir.Domain.Entities
 
         public ICollection<WordLanguage> WordLanguages { get; set; }
 
-        public ICollection<WordImage> WordImages { get; set; }
+        public ICollection<WordCountry> WordCountries { get; set; }
     }
 }

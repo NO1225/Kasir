@@ -12,9 +12,6 @@ namespace Kasir.Api.ViewModel
         [Display(Name = "العنوان")]
         public string WordTitle { get; set; }
 
-        [Display(Name = "الاسم")]
-        public string WordName { get; set; }
-
         [Display(Name = "التفاصيل")]
         public string WordInformation { get; set; }
     } 

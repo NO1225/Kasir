@@ -16,19 +16,9 @@
                 <input type="hidden" asp-for="Id" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input required asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input required asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Information" class="control-label"></label>
-                <input required asp-for="Information" class="form-control" />
-                <span asp-validation-for="Information" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <img width="200" height="200" src="@UploadDownloadHelper.ShowWordImage(Model.ImagePath)" />
@@ -59,12 +49,6 @@
                        class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Dsc Code</label>
-                    <input required name="WordLanguageDtos[@i].Name"
-                       value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordName"
-                       class="form-control" />
-                </div>
-                <div class="form-group">
                     <label class="control-label">Dsc Details</label>
                     <input required name="WordLanguageDtos[@i].Information"
                        value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordInformation"
@@ -73,12 +57,14 @@
             }
         </div>
         <div class="col-md-6 col-lg-4">
+        Countries
             @for (int i = 0; i < ((List<CountryDto>)ViewBag.Countries).Count(); i++)
             {
                 CountryDto country = ViewBag.Countries[i];
+                bool value = Model.WordCountryViewModels.FirstOrDefault(cl => cl.CountryId == country.Id) != null;
                 <div class="form-group">
                     <input type="hidden"
-                       name="WordImageDtos[@i].CountryId"
+                       name="WordCountryDtos[@i].CountryId"
                        value="@country.Id" />
                 </div>
                 <div class="form-group">
@@ -86,16 +72,10 @@
 
                 </div>
                 <div class="form-group">
-                    @if (Model.WordImageViewModels.FirstOrDefault(cl => cl.CountryId == country.Id)?.ImagePath == null)
-                    {
-                        <p>لا يوجد صورة</p>
-                    }
-                    else
-                    {
-                        <img width="100" height="100" src="@UploadDownloadHelper.ShowWordImage(Model.WordImageViewModels.FirstOrDefault(cl=>cl.CountryId == country.Id)?.ImagePath)" />
-
-                    }
-                    <input type="file" name="WordImageDtos[@i].WordImage" accept="image/*" class="form-control" />
+                    <input type="checkbox"
+                       name="WordCountryDtos[@i].Checked"
+                       checked="@(value?"on":null)"
+                       class="form-control" />
                 </div>
             }
         </div>

@@ -16,7 +16,7 @@ namespace Kasir.Application.Words.Commands.Create
 
             RuleFor(v => v.Name)
                 .MaximumLength(100).WithMessage("Name must not exceed 100 characters.")
-                .MustAsync(BeUniqueName).WithMessage("The specified country already exists.")
+                .MustAsync(BeUniqueName).WithMessage("The specified code already exists.")
                 .NotEmpty().WithMessage("Name is required.");
         }
 

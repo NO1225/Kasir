@@ -13,23 +13,10 @@
         <div class="col-md-12 col-lg-6 col-xl-4">
             <dl class="row">
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Title)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Title)
-                </dd>
-                <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Name)
                 </dt>
                 <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Name)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Information)
-                </dt>
-                <dd class="col-sm-8">
-                    g
-                    @Html.DisplayFor(model => model.Information)
                 </dd>
                 <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.ImagePath)
@@ -57,12 +44,6 @@
                         @Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordTitle
                     </dd>
                     <dt class="col-sm-4">
-                        Dsc Code
-                    </dt>
-                    <dd class="col-sm-8">
-                        @Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordName
-                    </dd>
-                    <dt class="col-sm-4">
                         Dsc Details
                     </dt>
                     <dd class="col-sm-8">
@@ -72,24 +53,23 @@
             </dl>
         </div>
         <div class="col-md-12 col-lg-6 col-xl-4">
+            Countries
+            
             <dl class="row">
                 @for (int i = 0; i < ((List<CountryDto>)ViewBag.Countries).Count(); i++)
                 {
                     CountryDto country = ViewBag.Countries[i];
+                    bool value = Model.WordCountryViewModels.FirstOrDefault(cl => cl.CountryId == country.Id) != null;
                     <dt class="col-sm-4">
                         @country.Name
                     </dt>
                     <dd class="col-sm-8">
-                        @if (Model.WordImageViewModels.FirstOrDefault(cl => cl.CountryId == country.Id)?.ImagePath == null)
-                        {
-                            <p>لا يوجد صورة</p>
-                        }
-                        else
-                        {
-                            <img width="100" height="100" src="@UploadDownloadHelper.ShowWordImage(Model.WordImageViewModels.FirstOrDefault(cl=>cl.CountryId == country.Id)?.ImagePath)" />
-                            <a href="#" onclick="removeButton(@Model.WordImageViewModels.FirstOrDefault(cl => cl.CountryId == country.Id)?.Id)">حذف</a>
 
-                        }
+                        <input type="checkbox"
+                           disabled
+                           checked="@(value?"on":null)"
+                           class="form-control" />
+
                     </dd>
 
                 }

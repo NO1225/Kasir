@@ -9,18 +9,12 @@ namespace Kasir.Api.ViewModel
     {
         public int Id { get; set; }
 
-        public string Title { get; set; }
-
-
         [Display(Name = "الاسم الافتراضي")]
         public string Name { get; set; }
 
-        [Display(Name = "التفاصيل الافتراضية")]
-        public string Information { get; set; }
-
         public List<WordLanguageDto> WordLanguageDtos { get; set; }
 
-        public List<CreateWordImage> WordImageDtos { get; set; }
+        public List<WordCountryDto> WordCountryDtos { get; set; }
 
         [Display(Name = "الصورة الافتراضية")]
         public IFormFile WordImage { get; set; }

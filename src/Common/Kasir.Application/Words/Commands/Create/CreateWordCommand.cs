@@ -15,14 +15,11 @@ namespace Kasir.Application.Words.Commands.Create
 {
     public class CreateWordCommand : IRequestWrapper<WordDto>
     {
-        public string Title { get; set; }
         public string Name { get; set; }
-
-        public string Information { get; set; }
 
         public List<WordLanguageDto> WordLanguageDtos { get; set; }
 
-        public List<WordImageDto> WordImageDtos { get; set; }
+        public List<WordCountryDto> WordCountriesDtos { get; set; }
 
 
         internal IFileStream WordImage;
@@ -55,17 +52,14 @@ namespace Kasir.Application.Words.Commands.Create
         {
             var entity = new Word
             {
-                Title = request.Title,
                 Name = request.Name,
-                Information = request.Information,
                 WordLanguages = request.WordLanguageDtos.Select(cl => new WordLanguage
                 {
                     LanguageId = cl.LanguageId,
                     Title = cl.Title,
-                    Name = cl.Name,
                     Information = cl.Information,
                 }).ToList(),
-                WordImages = new List<WordImage>()
+                WordCountries = new List<WordCountry>()
             };
 
             if (request.WordImage != null)
@@ -81,25 +75,15 @@ namespace Kasir.Application.Words.Commands.Create
                 entity.ImageName = res.Data;
             }
 
-            foreach (var wordImage in request.WordImageDtos)
+            foreach (var wordCountry in request.WordCountriesDtos)
             {
-                if (wordImage.WordImage == null)
+                if (wordCountry.Checked =="on")
                     continue;
-                var wordImageRes = await mediator.Send(new AddWordCountryImageCommand { WordImage = wordImage.WordImage });
 
-                if (wordImageRes.Succeeded == false)
+                entity.WordCountries.Add(new WordCountry
                 {
-                    logger.LogWarning("Image Upload Failed: " + wordImageRes.Error.Message);
-                }
-                else
-                {
-                    entity.WordImages.Add(new WordImage
-                    {
-                        CountryId = wordImage.CountryId,
-                        ImageName = wordImageRes.Data,
-                    });
-                }
-
+                    CountryId = wordCountry.CountryId,
+                });
             }
 
             await _context.Words.AddAsync(entity, cancellationToken);

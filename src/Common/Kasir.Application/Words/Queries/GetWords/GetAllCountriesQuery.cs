@@ -32,23 +32,19 @@ namespace Kasir.Application.Words.Queries.GetWords
         {
             List<WordDto> list = await _context.Words
                 .Include(w => w.WordLanguages)
-                .Include(w => w.WordImages)
-                .Where(w => w.WordImages.Any(wi => wi.CountryId == request.CountryId))
+                .Include(w => w.WordCountries)
+                .Where(w => w.WordCountries.Any(wi => wi.CountryId == request.CountryId))
                 .Select(c => new WordDto
                 {
                     CreateDate = c.CreateDate,
                     Id = c.Id,
-                    ImageName = UploadDownloadHelper.ShowWordImage(c.WordImages.FirstOrDefault(cl => cl.CountryId == request.CountryId) == null
-                    ? c.ImageName
-                    : c.WordImages.FirstOrDefault(cl => cl.CountryId == request.CountryId).ImageName),
-                    Title = c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null
-                    ? c.Name
+                    ImageName = UploadDownloadHelper.ShowWordImage(c.ImageName),
+                    Title = c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null 
+                    ? ""
                     : c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Title,
-                    Name = c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null
-                    ? c.Name
-                    : c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Name,
+                    Name = c.Name,
                     Information = c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId) == null
-                    ? c.Information
+                    ? ""
                     : c.WordLanguages.FirstOrDefault(cl => cl.LanguageId == request.LanguageId).Information
                 }).ToListAsync(cancellationToken);
 
