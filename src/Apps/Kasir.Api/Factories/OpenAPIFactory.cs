@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using NJsonSchema.Generation;
 using NSwag;
-using NSwag.Generation.Processors;
-using NSwag.Generation.Processors.Contexts;
 using NSwag.Generation.Processors.Security;
 using System;
 using System.Collections.Generic;

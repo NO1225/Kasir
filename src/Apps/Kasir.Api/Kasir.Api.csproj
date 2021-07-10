@@ -10,10 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\api\SwaggerClientBase.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Views\Account\ChangePassword.cshtml" />
     <None Include="Views\Account\Confirmation.cshtml" />
     <None Include="Views\Account\Manage.cshtml" />
@@ -370,10 +366,6 @@
     <Content Update="wwwroot\lib\pdfmake\vfs_fonts.min.js">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\api\" />
   </ItemGroup>
 
   <Target Name="NSwag" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">

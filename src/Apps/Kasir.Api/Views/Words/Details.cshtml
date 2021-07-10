@@ -26,40 +26,38 @@
                 </dd>
             </dl>
         </div>
-        <div class="col-md-12 col-lg-6 col-xl-4">
-            <dl class="row">
-                @for (int i = 0; i < ((List<LanguageDto>)ViewBag.Languages).Count(); i++)
-                {
-                    LanguageDto lang = ViewBag.Languages[i];
-                    <dt class="col-sm-4">
-                        <label class="control-label">@lang.Name</label>
+        <div class="col-md-12 col-lg-6 col-xl-4 p-2">
+            @for (int i = 0; i < ((List<LanguageDto>)ViewBag.Languages).Count(); i++)
+            {
+                LanguageDto lang = ViewBag.Languages[i];
+                <dl class="row border p-2">
 
-                    </dt>
-                    <dd class="col-sm-8">
-                    </dd>
                     <dt class="col-sm-4">
-                        WS Name
+                        WS Name (@lang.Name)
                     </dt>
                     <dd class="col-sm-8">
                         @Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordTitle
                     </dd>
                     <dt class="col-sm-4">
-                        Dsc Details
+                        Dsc Details (@lang.Name)
                     </dt>
                     <dd class="col-sm-8">
                         @Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordInformation
                     </dd>
-                }
-            </dl>
+                </dl>
+
+            }
         </div>
         <div class="col-md-12 col-lg-6 col-xl-4">
             Countries
-            
-            <dl class="row">
-                @for (int i = 0; i < ((List<CountryDto>)ViewBag.Countries).Count(); i++)
-                {
-                    CountryDto country = ViewBag.Countries[i];
-                    bool value = Model.WordCountryViewModels.FirstOrDefault(cl => cl.CountryId == country.Id) != null;
+
+            @for (int i = 0; i < ((List<CountryDto>)ViewBag.Countries).Count(); i++)
+            {
+
+                CountryDto country = ViewBag.Countries[i];
+                bool value = Model.WordCountryViewModels.FirstOrDefault(cl => cl.CountryId == country.Id) != null;
+                <dl class="row border p-2">
+
                     <dt class="col-sm-4">
                         @country.Name
                     </dt>
@@ -71,9 +69,9 @@
                            class="form-control" />
 
                     </dd>
+                </dl>
 
-                }
-            </dl>
+            }
         </div>
     </div>
 

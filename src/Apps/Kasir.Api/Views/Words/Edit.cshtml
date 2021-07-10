@@ -35,48 +35,54 @@
             @for (int i = 0; i < ((List<LanguageDto>)ViewBag.Languages).Count(); i++)
             {
                 LanguageDto lang = ViewBag.Languages[i];
-                <div class="form-group">
-                    <input type="hidden"
-                       name="WordLanguageDtos[@i].LanguageId"
-                       value="@lang.Id" />
-                </div>
-                <label class="control-label">@lang.Name</label>
+                <input type="hidden"
+                   name="WordLanguageDtos[@i].LanguageId"
+                   value="@lang.Id" />
+                <div class=" border p-2">
 
-                <div class="form-group">
-                    <label class="control-label">WS Name</label>
-                    <input required name="WordLanguageDtos[@i].Title"
-                       value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordTitle"
-                       class="form-control" />
+                    <div class="form-group">
+                        <label class="control-label">WS Name (@lang.Name)</label>
+                        <input required name="WordLanguageDtos[@i].Title"
+                           value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordTitle"
+                           class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Dsc Details (@lang.Name)</label>
+                        <input required name="WordLanguageDtos[@i].Information"
+                           value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordInformation"
+                           class="form-control" />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">Dsc Details</label>
-                    <input required name="WordLanguageDtos[@i].Information"
-                       value="@Model.WordLanguageViewModels.FirstOrDefault(cl=>cl.LanguageId == lang.Id)?.WordInformation"
-                       class="form-control" />
-                </div>
+
             }
         </div>
         <div class="col-md-6 col-lg-4">
-        Countries
+            Countries
             @for (int i = 0; i < ((List<CountryDto>)ViewBag.Countries).Count(); i++)
             {
                 CountryDto country = ViewBag.Countries[i];
                 bool value = Model.WordCountryViewModels.FirstOrDefault(cl => cl.CountryId == country.Id) != null;
-                <div class="form-group">
+                <div class="input-group mb-3 border p-2">
                     <input type="hidden"
                        name="WordCountryDtos[@i].CountryId"
                        value="@country.Id" />
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox" name="WordCountryDtos[@i].Checked"
+                               checked="@(value?"on":null)">
+                        </div>
+                    </div>
+                    <label class="control-label px-2">@country.Name</label>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">@country.Name</label>
+                @*
+                    <div class="form-group border p-2">
 
-                </div>
-                <div class="form-group">
                     <input type="checkbox"
-                       name="WordCountryDtos[@i].Checked"
-                       checked="@(value?"on":null)"
-                       class="form-control" />
-                </div>
+                    name="WordCountryDtos[@i].Checked"
+                    checked="@(value?"on":null)"
+                    class="form-control" />
+
+                    </div>*@
             }
         </div>
     </form>
